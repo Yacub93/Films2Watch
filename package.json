@@ -1,0 +1,14 @@
+{
+  "name": "filmapp",
+  "version": "1.0.0",
+  "description": "Film Search App",
+  "main": "index.js",
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "author": "Yacub Ali",
+  "license": "ISC",
+  "dependencies": {
+    "lite-server": "^2.3.0"
+  }
+}

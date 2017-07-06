@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="filmApp" ng-controller="filmCtrl">
+<head>
+	<meta charset="UTF-8">
+	<title>Film App</title>
+
+	<!-- JS Scripts -->
+	<script 
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.js"></script>
+	<script src="js/filmapp.js"></script>
+
+
+	<!-- CSS Links-->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/filmapp.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="container text-center">
+		<h1>{{appInfo.heading}}</h1>
+	<div>
+		<a class="btn-lg" 
+		ng-href="{{appInfo.subHeading2.githubprofile}}" 
+		target="blank" title="Yacub93"><i class="fa fa-github"></i></a>
+
+		<a class="btn-lg" 
+		ng-href="{{appInfo.subHeading2.linkedinprofile}}" 
+		target="blank" title="Yacub Ali"><i class="fa fa-linkedin"></i></a>
+	</div>
+
+	</div>
+
+	<!-- Film Search filter -->
+<!-- 	<div class="form-section">
+		<form>
+			<div class="input-group add-on">
+		      <input class="form-control" ng-model="formData.searchTerm" placeholder="Search..." type="text" autofocus="">
+		      <div class="input-group-btn">
+		        <button class="btn btn-default search" ng-click="getStreamer()"><i class="fa fa-search"></i></button>
+		      </div>
+		    </div>
+		</form>
+	</div> -->
+	<!-- Film Grid -->
+<!-- 	<div class="container text-center">
+	<h2>{{appInfo.subHeading1}}</h2>
+	  <div class="row" ng-repeat="result in results">
+		    <div class="col-md-4"><img ng-src="{{result.image}}"></div>
+		    <div class="col-sm-3">{{result.title}}</div>
+		    <div>{{result.genre}}</div>
+		   	<div class="col-sm-3">{{result.release}}</div>
+
+	  </div>
+	</div> -->
+<!-- <div class="container">
+ <div class="row" ng-repeat="result in results">
+  <div class="col-md-2">
+    <div class="thumbnail">
+      <a href="/w3images/lights.jpg">
+        <img ng-src="{{result.image}}" style="width: 100%;">
+        <div class="caption">
+          <p>{{result.title}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</div> -->
+
+
+
+  <div id="folowerInfo">
+    	<table class="table" >
+		    <thead>
+		 	<tr>
+		    </tr>
+		    </thead>
+		    <tbody ng-repeat="result in results">
+		      <tr>
+		        <td>
+		        	<img ng-src="{{result.image}}">
+		        </td>
+		        <td>
+		        	<p>{{result.title}}</p>
+		        	<p>{{result.release |  date:  "dd.MM.y" : UTC+00:00 }}</p>
+		        </td>
+		      </tr>
+		    </tbody>
+		</table>
+  </div>
+
+	
+</body>
+</html>
