@@ -1,21 +1,87 @@
-.thumbnail{
-display: block;
-margin-bottom: 10px;
-margin-top: 10px;
-line-height: 1.4;
-background-color: #fff;
-border: 1px solid #ddd;
-border-radius: 4px;
-transition: border .2s;
-/*margin-left:0px auto;
-margin-right:0px auto;*/
+html,body{
+	background-color: #ecf0f1;
+}
+
+
+.nav-bar{
+	/*background-color: #c0392b;*/
+	height: 40px;
+	/*width: 50px;*/
+	margin-right: 200px;
+	margin-left: 500px;
 
 }
 
-.container{
-	margin-top: 150px;
-margin-left: 130px;
-margin-right: 50px;
-padding-right: -300px;
+.nav-pills {
+  	font-size: 1.4em;
+	margin-bottom: 10px;
 
+}
+
+a.nav-link:hover {
+    background-color: #34495e;
+}
+
+
+a.nav-link{
+	color: #2980b9;
+}
+
+#Film {
+	margin-left: 250px;
+}
+
+/* Film Section */
+#Film .film-item {
+
+ margin:5px;
+  /*background-color: white;*/
+ border: 1px outset rgba(255, 255, 255, 0.6);
+ width: 100%;
+}
+
+#Film .film-item:hover {
+  transition: 0.5s;
+  box-shadow: 5px 10px 5px rgba(0,0,0,0,0);
+}
+
+#Film .film-caption{
+  /*max-width: 500px;*/
+  margin: 0 auto;
+  /*background-color: rgba(0,0,0, 0.8);*/
+  text-align: center;
+  /*padding: 25px;*/
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: black;
+}
+
+.film-item:hover .overlay {
+  opacity: 0.7;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }

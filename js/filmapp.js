@@ -16,9 +16,12 @@ filmApp.controller("filmCtrl", function ($scope, $http) {
 
 	// var movieDBURL = "https://api.themoviedb.org/3/movie/500?api_key=" + apiKey;
 	// var movieDBURL = "https://www.themoviedb.org/auth/access?request_token="+ apiKey;
-	var movieDBURL = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+apiKey;
+	var movieDBURL = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+apiKey+'&language=en-UK&page=1&region=US';
+	var movieDBURL2 = 'https://api.themoviedb.org/3/movie/popular?api_key='+apiKey+'&language=en-UK&page=1&region=US';
+
 	var baseImgURL = "http://image.tmdb.org/t/p/w185";
 	$scope.results = [];
+	$scope.results2 = [];
 	// var filmTitle = $scope.formData.searchTerm;
 
 
@@ -46,10 +49,12 @@ filmApp.controller("filmCtrl", function ($scope, $http) {
   // });
 
 
+
+// Now Playing
 $http.get(movieDBURL).success(function(data) {
 
-	console.log(movieDBURL);
-	console.log(data);
+	// console.log(movieDBURL);
+	// console.log(data);
 	var results = [];
 	// results.push(data);
 
@@ -64,18 +69,49 @@ $http.get(movieDBURL).success(function(data) {
               // 						 genre: results[i].genres,
               // 						 release: results[i].release_date
         					 // });
-        					 console.log(data.results[i]);
+        					 // console.log(data.results[i]);
               	// console.log($scope.results[i]);
               	}
 
+});//.http.get movieDBURL
 
-	//    angular.forEach(results, function(value, key) {
-	//    	console.log(results);
- //        $scope.results.push({title: value.name
 
- //        					 });
-	// });
+// Popular Movies
+$http.get(movieDBURL2).success(function(data2) {
+
+	// var results2 = [];
+	// $scope.results = [];
+	// results.push(data);
+
+
+          for (var i = 0; i < data2.results.length; i++) {
+          	$scope.results2.push({title: data2.results[i].original_title,
+          						image: baseImgURL + data2.results[i].poster_path,
+          						release: data2.results[i].release_date});
+
+              // 	$scope.results.push({title: results[i].original_title,
+              // 						 image: baseImgURL + results[i].poster_path,
+              // 						 genre: results[i].genres,
+              // 						 release: results[i].release_date
+        					 // });
+        					 // console.log(data2.results[i]);
+              	console.log($scope.results2[i]);
+              	}
 
 });//.http.get movieDBURL
 
+
+
 });//.Close Controller
+
+filmApp.controller('PanelController', function(){
+  this.tab = 1;
+  this.selectTab = function(setTab){
+    this.tab = setTab;
+  }
+  this.isSelected = function(checkTab){
+    return this.tab === checkTab;
+  }
+});//.Page Controller
+
+
