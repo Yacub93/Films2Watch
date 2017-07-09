@@ -22,7 +22,7 @@ filmApp.controller("filmCtrl", function ($scope, $http) {
 	var baseImgURL = "http://image.tmdb.org/t/p/w185";
 	$scope.results = [];
 	$scope.results2 = [];
-	// var filmTitle = $scope.formData.searchTerm;
+	
 
 
 
@@ -47,7 +47,6 @@ filmApp.controller("filmCtrl", function ($scope, $http) {
   //             	console.log($scope.results.title);
   //             	}
   // });
-
 
 
 // Now Playing
@@ -95,10 +94,41 @@ $http.get(movieDBURL2).success(function(data2) {
               // 						 release: results[i].release_date
         					 // });
         					 // console.log(data2.results[i]);
-              	console.log($scope.results2[i]);
+              	// console.log($scope.results2[i]);
               	}
 
 });//.http.get movieDBURL
+
+
+
+
+$scope.getFilm = function(value) {
+
+	if (typeof value == 'undefined' || value == null || value == "") {
+      console.log("searchTerm " + value);
+      alert("Please Enter a Search Term!");
+    } 
+    else {
+	var filmTitle = $scope.formData.searchTerm;
+
+	console.log(filmTitle);
+	var searchQueryURL = 'https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query='+filmTitle+'&language=en-UK&api_key='+apiKey;
+
+	$http.get(searchQueryURL).success(function(data){
+			          for (var i = 0; i < data.results.length; i++) {
+          	$scope.results.push({title: data.results[i].original_title,
+          						image: baseImgURL + data.results[i].poster_path,
+          						release: data.results[i].release_date});
+        					 console.log(data.results[i]);
+              	// console.log($scope.results[i]);
+              	}
+
+
+
+	});
+	}
+}
+
 
 
 
@@ -113,5 +143,4 @@ filmApp.controller('PanelController', function(){
     return this.tab === checkTab;
   }
 });//.Page Controller
-
 

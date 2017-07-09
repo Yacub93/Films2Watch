@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="filmApp" ng-controller="filmCtrl">
+<html lang="en" ng-app="filmApp">
 <head>
 	<meta charset="UTF-8">
 	<title>Film App</title>
 
 	<!-- JS Scripts -->
 	<script 
-	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 	<script src="js/filmapp.js"></script>
+		<script 
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js">
+	</script> 
 
 
 	<!-- CSS Links-->
@@ -15,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="css/filmapp.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body ng-controller='PanelController as panel'>
+<body ng-controller="filmCtrl">
 	<div class="container text-center">
 		<h1>{{appInfo.heading}}</h1>
 	<div>
@@ -28,7 +31,21 @@
 		target="blank" title="Yacub Ali"><i class="fa fa-linkedin"></i></a>
 	</div>
 
+		<!-- Film Search filter -->
+	<div class="form-section">
+		<ng-form class="ng-pristine ng-valid" autocomplete="off">
+			<div class="input-group add-on">
+		      <input class="form-control" ng-model="formData.searchTerm" placeholder="Search..." type="text" autofocus="">
+		      <div class="input-group-btn">
+		        <button class="btn btn-default search" id="search" ng-click="getFilm(formData.searchTerm)"><i class="fa fa-search"></i></button>
+		      </div>
+		    </div>
+		</ng-form>
 	</div>
+
+	</div>
+
+	<div ng-controller='PanelController as panel'>
 	<div class="nav-bar">
 	    <ul class="nav nav-pills">
 	      <li ng-class="{active: panel.isSelected(1) } ">
@@ -40,17 +57,7 @@
 	    </ul>
     </div>
 
-	<!-- Film Search filter -->
-<!-- 	<div class="form-section">
-		<form>
-			<div class="input-group add-on">
-		      <input class="form-control" ng-model="formData.searchTerm" placeholder="Search..." type="text" autofocus="">
-		      <div class="input-group-btn">
-		        <button class="btn btn-default search" ng-click="getFilm()"><i class="fa fa-search"></i></button>
-		      </div>
-		    </div>
-		</form>
-	</div> -->
+
 
 <!-- Film Grid -->
  <!-- .pageOne -->
@@ -110,7 +117,7 @@
     <!-- </div> -->
   </div> 
   <!-- .Close pageTwo -->
-
+</div>
 
 
 
