@@ -1,16 +1,3 @@
-var filmApp = angular.module('filmApp', []);
-
-filmApp.controller("filmCtrl", function ($scope, $http) {
-	// Controller
-	$scope.appInfo = {
-		heading: "Regent Street Cinema",
-		subHeading1:"Now Showing",
-		subHeading2: {
-	      githubprofile: "https://github.com/Yacub93",
-	      linkedinprofile: "https://uk.linkedin.com/in/yacub-ali-4898b9103"
-	    }
-	};
-
 	var apiKey = "d313b5dab4af5c3ad0636657c1efb5b4"; //v3 auth
 	// var apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMzEzYjVkYWI0YWY1YzNhZDA2MzY2NTdjMWVmYjViNCIsInN1YiI6IjU5NWU0YWYyOTI1MTQxMGM1NjA4NDNjOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eSmWezzSAKWNn-4bkgV17KLfTShzeF4grZAg7FqCISQ";//v4 auth
 
@@ -18,35 +5,16 @@ filmApp.controller("filmCtrl", function ($scope, $http) {
 	// var movieDBURL = "https://www.themoviedb.org/auth/access?request_token="+ apiKey;
 	var movieDBURL = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+apiKey+'&language=en-UK&page=1&region=US';
 	var movieDBURL2 = 'https://api.themoviedb.org/3/movie/popular?api_key='+apiKey+'&language=en-UK&page=1&region=US';
-
 	var baseImgURL = "http://image.tmdb.org/t/p/w185";
+
+var filmApp = angular.module('filmApp', ['ngMaterial','ngAnimate']);
+
+filmApp.controller("filmCtrl", function ($scope, $http) {
+
+	
 	$scope.results = [];
 	$scope.results2 = [];
 	
-
-
-
-  // Simple GET request example:
-  // $http({
-  //       method: 'GET',
-  //       url: movieDBURL,
-  //       headers:{
-  //         'Content-Type': 'application/json;charset=utf-8'
-  //       },
-  //     }).then(function successCallback(response) {
-  //         // this callback will be called asynchronously
-  //         // when the response is available
-  //        console.log(response.data);
-
-  //                  for (var i = 0; i < response.data.length; i++) {
-
-  //             	$scope.results.push({title: response.data.results[i]
-  //             						 // image: baseImgURL + response.data.poster_path
- 
-  //       					 });
-  //             	console.log($scope.results.title);
-  //             	}
-  // });
 
 
 // Now Playing
@@ -102,45 +70,87 @@ $http.get(movieDBURL2).success(function(data2) {
 
 
 
-$scope.getFilm = function(value) {
+// $scope.getFilm = function(value) {
 
-	if (typeof value == 'undefined' || value == null || value == "") {
-      console.log("searchTerm " + value);
-      alert("Please Enter a Search Term!");
-    } 
-    else {
-	var filmTitle = $scope.formData.searchTerm;
+// 	if (typeof value == 'undefined' || value == null || value == "") {
+//       console.log("searchTerm " + value);
+//       alert("Please Enter a Search Term!");
+//     } 
+//     else {
+// 	var filmTitle = $scope.formData.searchTerm;
 
-	console.log(filmTitle);
-	var searchQueryURL = 'https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query='+filmTitle+'&language=en-UK&api_key='+apiKey;
+// 	console.log(filmTitle);
+// 	var searchQueryURL = 'https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query='+filmTitle+'&language=en-UK&api_key='+apiKey;
 
-	$http.get(searchQueryURL).success(function(data){
-			          for (var i = 0; i < data.results.length; i++) {
-          	$scope.results.push({title: data.results[i].original_title,
-          						image: baseImgURL + data.results[i].poster_path,
-          						release: data.results[i].release_date});
-        					 console.log(data.results[i]);
-              	// console.log($scope.results[i]);
-              	}
+// 	$http.get(searchQueryURL).success(function(data){
+// 			          for (var i = 0; i < data.results.length; i++) {
+// 			          	 //    if (data.results.length === 0 || data === null) {
+//           					// 		break;
+//           					// }
+//           					// else{
+//           	$scope.results.push({title: data.results[i].original_title,
+//           						image: baseImgURL + data.results[i].poster_path,
+//           						release: data.results[i].release_date});
+    
+//         					 console.log(data.results[i]);
+//         			// }
+//               	// console.log($scope.results[i]);
+//               	}
 
 
 
-	});
-	}
-}
+// 	}).error(function(data, status, headers, config) {
+
+//         if ($scope.status === 404) {
+//         	return;
+//         }
+//   });
+// 	}//.Close else
+// }//.Close getFilm()
 
 
 
 
 });//.Close Controller
 
-filmApp.controller('PanelController', function(){
-  this.tab = 1;
-  this.selectTab = function(setTab){
-    this.tab = setTab;
-  }
-  this.isSelected = function(checkTab){
-    return this.tab === checkTab;
-  }
-});//.Page Controller
+// filmApp.controller('PanelController', function(){
+//  vm = this;
+//   vm.tab = 1;
+//   vm.selectTab = function(setTab){
+//     vm.tab = setTab;
+//   }
+//   vm.isSelected = function(checkTab){
+//     return vm.tab === checkTab;
+//   }
+// });//.Page Controller
+
+
+// function AppController($scope, $http) {
+// filmApp.controller('DemoController', function($scope, $http){
+// 	$scope.selectedItem = null;
+// 	    $scope.SelectedCountry = null;
+ 
+ 
+//     //After select country event
+//     $scope.afterSelectedFilm = function (selected) {
+//         if (selected) {
+//             $scope.SelectedFilm = selected.originalObject;
+//         }
+//     }
+//   $scope.query = function(searchText) {
+//     return $http({
+//         method: 'GET',
+//         url: 'https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query='+searchText+'&language=en-UK&api_key=d313b5dab4af5c3ad0636657c1efb5b4'
+
+//       }).then(function successCallback(response) {
+//           // this callback will be called asynchronously
+//           // when the response is available
+//          // console.log(response.data);
+//          return response.data;
+
+//   });
+//   };
+// });
+
+
 

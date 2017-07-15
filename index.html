@@ -1,25 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="filmApp">
+<html lang="en" ng-app="filmApp" ng-controller="filmCtrl">
 <head>
 	<meta charset="UTF-8">
 	<title>Film App</title>
-
-	<!-- JS Scripts -->
-	<script 
-	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
-	<script src="js/filmapp.js"></script>
-		<script 
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js">
-	</script> 
-
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
 	<!-- CSS Links-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+	  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
 	<link rel="stylesheet" type="text/css" href="css/filmapp.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	    <!-- Simple Side bar CSS -->
+    <link rel="stylesheet" type="text/css" href="css/simple-sidebar.css" >
+
 </head>
-<body ng-controller="filmCtrl">
-	<div class="container text-center">
+<body ng-controller="rootController">
+
+
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Regent Street Cinema
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Popular</a>
+                </li>
+                <li>
+                    <a href="#">Top Rated</a>
+                </li>
+                <li>
+                    <a href="#">Now Playing</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+
+<div id="page-content-wrapper">
+	<div class="container-fluid">
+	<a href="#menu-toggle" class="fa fa-bars" id="menu-toggle"></a>
 		<h1>{{appInfo.heading}}</h1>
 	<div>
 		<a class="btn-lg" 
@@ -32,7 +64,43 @@
 	</div>
 
 		<!-- Film Search filter -->
-	<div class="form-section">
+	<div layout="row" ng-controller="SearchController">
+      <md-content class="md-padding" flex>
+            <div layout-gt-sm="row">
+<!--             <md-input-container>
+              <label>Film Name</label>
+              <input type="text" class="form-control">
+            </md-input-container> -->
+          <md-autocomplete 
+              md-autoselect=true
+              placeholder="Search for films"
+              md-items="item in querySearch(searchText)"
+              md-item-text="item.title"
+              md-min-length="2"
+              md-search-text="searchText"
+              md-selected-item="selectedItem">
+            <md-item-template>
+              <span class="films-title">
+                <span md-highlight-flags="^i" md-highlight-text="searchText">
+                  {{item.title}}
+                </span>
+              </span>
+            </md-item-template>
+            <md-not-found>
+              No match found.
+            </md-not-found>
+          </md-autocomplete>
+          </div>
+      </md-content>
+    </div>
+
+
+<!-- 	<div class="form-section" ng-controller="DemoController">
+	<md-autocomplete  md-search-text="formData.searchTerm" md-items="result in getFilm(formData.searchTerm)">
+	  <md-item-template>
+	    <span md-highlight-text="searchText">{{result.title}}</span>
+	  </md-item-template>
+	</md-autocomplete>
 		<ng-form class="ng-pristine ng-valid" autocomplete="off">
 			<div class="input-group add-on">
 		      <input class="form-control" ng-model="formData.searchTerm" placeholder="Search..." type="text" autofocus="">
@@ -41,8 +109,9 @@
 		      </div>
 		    </div>
 		</ng-form>
-	</div>
+	</div> -->
 
+		</div>
 	</div>
 
 	<div ng-controller='PanelController as panel'>
@@ -118,9 +187,43 @@
   </div> 
   <!-- .Close pageTwo -->
 </div>
+    </div>
+    <!-- /#wrapper -->
 
+	<!-- JS Scripts -->
+	<script 
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+	<script 
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js">
+	</script> 
+    <script 
+    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script 
+    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script 
+    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
+	  <!-- Angular Material Library -->
+	  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/filmapp.js"></script>
+    <script src="js/controllers/rootController.js"></script>
+    <script src="js/controllers/singleFilmController.js"></script>
+    <script src="js/controllers/listFilmController.js"></script>
+    <script src="js/controllers/searchFilmController.js"></script>
+    <script src="js/controllers/panelController.js"></script>
+
+        <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 
 	
 </body>
