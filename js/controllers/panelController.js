@@ -1,4 +1,6 @@
-filmApp.controller('PanelController', function(){
+// filmApp.controller('PanelController', function(){
+filmApp.controller('PanelController',[function(){	
+
  vm = this;
   vm.tab = 1;
   vm.selectTab = function(setTab){
@@ -7,4 +9,4 @@ filmApp.controller('PanelController', function(){
   vm.isSelected = function(checkTab){
     return vm.tab === checkTab;
   }
-});//.Page Controller
+}]);//.Page Controller

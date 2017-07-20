@@ -1,9 +1,11 @@
-//Root controller
-filmApp.controller('rootController',['$scope', function($scope){
+//About controller
+'use strict';
 
-	// Root Controller
+filmApp.controller('aboutController',['$scope', function($scope){
+
+	// About Info
 	$scope.appInfo = {
-		heading: "Films2Watch",
+		heading: "About Page",
 		subHeading: {
 	      githubprofile: "https://github.com/Yacub93",
 	      linkedinprofile: "https://uk.linkedin.com/in/yacub-ali-4898b9103"

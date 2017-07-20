@@ -1,0 +1,55 @@
+ <!-- .Single View -->
+		<!-- Film Search autocomplete -->
+<div layout="row" ng-controller="SearchController as ctrl">
+      <md-content class="md-padding" flex>
+            <div layout-gt-sm="row">
+          <md-autocomplete 
+          	  placeholder="Search films in theaters" 
+              flex=""
+              md-autofocus="true"
+              md-autoselect="true"
+              md-clear-button="true"
+              md-select-on-match=true
+              md-no-cache="ctrl.noCache"
+              md-items="item in ctrl.querySearch(ctrl.searchText)"
+              md-item-text="item"
+              md-search-text="ctrl.searchText"
+              md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+              md-selected-item-change="ctrl.selectedItemChange(item)"
+              md-selected-item="ctrl.selectedItem"
+              md-min-length="2">
+            <md-item-template>
+              <span class="item">
+                <span md-highlight-flags="^i" md-highlight-text="ctrl.searchText">
+                  {{item}}
+                </span>
+              </span>
+            </md-item-template>
+            <md-not-found>
+              No match found.
+            </md-not-found>
+          </md-autocomplete>
+          </div>
+      </md-content>
+</div>
+
+
+
+<div id="singleFilm">
+    <div class="row">
+        <div class="col-md-3 film-item">
+            <!-- <img ng-src="{{result.image}}" class="image"> -->
+            <div class="overlay">
+    			<div class="text">
+    				<!-- <h3>{{result.title}}</h3> -->
+    			    <!-- <p>{{result.release |  date:  "dd.MM.y" : UTC+00:00 }}</p> -->
+    			    <!-- <p>{{result.release |  date:  "yyyy" : UTC+00:00 }}</p> -->
+    			    <!-- <h1>selectedItemChange: {{ results }}</h1> -->
+    			</div>
+         	</div>
+       </div> 
+    </div> 
+</div>
+  <!-- .Close Single View -->
+</div>
+<!-- /#wrapper -->

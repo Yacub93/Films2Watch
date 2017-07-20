@@ -1,181 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="filmApp" ng-controller="filmCtrl">
+<html lang="en" ng-app="filmApp">
 <head>
 	<meta charset="UTF-8">
-	<title>Film App</title>
+	<title>Films2Watch App</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
-	<!-- CSS Links-->
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-	  <!-- Angular Material style sheet -->
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
-	<link rel="stylesheet" type="text/css" href="css/filmapp.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	    <!-- Simple Side bar CSS -->
-    <link rel="stylesheet" type="text/css" href="css/simple-sidebar.css" >
-
-</head>
-<body ng-controller="rootController">
-
-
-
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Regent Street Cinema
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Popular</a>
-                </li>
-                <li>
-                    <a href="#">Top Rated</a>
-                </li>
-                <li>
-                    <a href="#">Now Playing</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-
-<div id="page-content-wrapper">
-	<div class="container-fluid">
-	<a href="#menu-toggle" class="fa fa-bars" id="menu-toggle"></a>
-		<h1>{{appInfo.heading}}</h1>
-	<div>
-		<a class="btn-lg" 
-		ng-href="{{appInfo.subHeading2.githubprofile}}" 
-		target="blank" title="Yacub93"><i class="fa fa-github"></i></a>
-
-		<a class="btn-lg" 
-		ng-href="{{appInfo.subHeading2.linkedinprofile}}" 
-		target="blank" title="Yacub Ali"><i class="fa fa-linkedin"></i></a>
-	</div>
-
-		<!-- Film Search autocomplete -->
-	<div layout="row" ng-controller="SearchController as ctrl">
-      <md-content class="md-padding" flex>
-            <div layout-gt-sm="row">
-          <md-autocomplete 
-          	  placeholder="Search films in release" 
-              flex=""
-              md-autofocus="true"
-              md-autoselect="true"
-              md-clear-button="true"
-              md-select-on-match=true
-              md-no-cache="ctrl.noCache"
-              md-items="item in ctrl.querySearch(ctrl.searchText)"
-              md-item-text="item.title"
-              md-search-text="ctrl.searchText"
-              md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-              md-selected-item-change="ctrl.selectedItemChange(item)"
-              md-selected-item="ctrl.selectedItem"
-              md-min-length="2">
-            <md-item-template>
-              <span class="item">
-                <span md-highlight-flags="^i" md-highlight-text="ctrl.searchText">
-                  {{item.title}}
-                </span>
-              </span>
-            </md-item-template>
-            <md-not-found>
-              No match found.
-            </md-not-found>
-          </md-autocomplete>
-          </div>
-      </md-content>
-    </div>
-
-
-		</div>
-	</div>
-
-	<div ng-controller='PanelController as panel'>
-	<div class="nav-bar">
-	    <ul class="nav nav-pills">
-	      <li ng-class="{active: panel.isSelected(1) } ">
-	        <a data-toggle="pill" class="nav-link fa fa-fire" ng-href="#pageHot" ng-click="panel.selectTab(1)"> Popular</a>
-	      </li>
-	      <li ng-class="{active: panel.isSelected(2) }">
-	        <a data-toggle="pill" class="nav-link fa fa-globe" ng-href="#pageNowPlaying" ng-click="panel.selectTab(2)"> Now Playing</a>
-	      </li>
-	    </ul>
-    </div>
-
-
-
-<!-- Film Grid -->
- <!-- .pageOne -->
-  <div id="Film" class="pageHot" ng-show='panel.isSelected(1)'>
-    <!-- <div class="row"> -->
-       <!-- <hr class="break"> -->
-       <div class="row">
-        <div class="col-md-3 film-item" ng-repeat="result in results">
-          <!-- <div class="card"> -->
-            <img ng-src="{{result.image}}" class="image">
-              <div class="overlay">
-    			<div class="text">
-    				<h3>{{result.title}}</h3>
-    			    <!-- <p>{{result.release |  date:  "dd.MM.y" : UTC+00:00 }}</p> -->
-    			    <p>{{result.release |  date:  "yyyy" : UTC+00:00 }}</p>
-    			</div>
-  			  </div>
-<!--             <div class="card-block">
-               <div class="portfolio-caption">
-                     <h4>{{result.title}}</h4>
-                      <p id="small-text" class="text-muted">{{result.release}}</p>
-               </div>
-            </div> -->
-          <!-- </div> -->
-         </div>
-       </div> 
-    <!-- </div> -->
-  </div> 
-  <!-- .Close pageOne -->
-
-
-<!-- Film Grid -->
- <!-- .pageTwo -->
-  <div id="Film" class="pageNowPlaying" ng-show='panel.isSelected(2)'>
-    <!-- <div class="row"> -->
-       <!-- <hr class="break"> -->
-       <div class="row">
-        <div class="col-md-3 film-item" ng-repeat="result in results2">
-          <!-- <div class="card"> -->
-            <img ng-src="{{result.image}}" class="image">
-              <div class="overlay">
-    			<div class="text">
-    				<h3>{{result.title}}</h3>
-    			    <!-- <p>{{result.release |  date:  "dd.MM.y" : UTC+00:00 }}</p> -->
-    			    <p>{{result.release |  date:  "yyyy" : UTC+00:00 }}</p>
-    			</div>
-  			  </div>
-<!--             <div class="card-block">
-               <div class="portfolio-caption">
-                     <h4>{{result.title}}</h4>
-                      <p id="small-text" class="text-muted">{{result.release}}</p>
-               </div>
-            </div> -->
-          <!-- </div> -->
-         </div>
-       </div> 
-    <!-- </div> -->
-  </div> 
-  <!-- .Close pageTwo -->
-</div>
-    </div>
-    <!-- /#wrapper -->
 
 	<!-- JS Scripts -->
 	<script 
@@ -203,6 +32,68 @@
     <script src="js/controllers/listFilmController.js"></script>
     <script src="js/controllers/searchFilmController.js"></script>
     <script src="js/controllers/panelController.js"></script>
+
+	<!-- CSS Links-->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+	  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+	<link rel="stylesheet" type="text/css" href="css/filmapp.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	    <!-- Simple Side bar CSS -->
+    <link rel="stylesheet" type="text/css" href="css/simple-sidebar.css" >
+
+</head>
+<body>
+
+
+<div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+	            <ul class="sidebar-nav">
+	                <li class="sidebar-brand">
+	                    <a href="/">
+	                        Films2Watch
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="#">Watch list</a>
+	                </li>
+	                <li>
+	                    <a href="#/top-rated">Top rated</a>
+	                </li>
+	                <li>
+	                    <a href="#/search">Search films</a>
+	                </li>
+	                <li>
+	                    <a href="#/about">About</a>
+	                </li>
+	            </ul>
+        </div>
+
+        <!-- /#sidebar-wrapper -->
+
+	<div id="page-content-wrapper" ng-controller="rootController">
+		<div class="container-fluid">
+			<a href="#menu-toggle" class="fa fa-bars" id="menu-toggle"></a>
+			<h1>{{appInfo.heading}}</h1>
+			<div>
+				<a class="btn-lg" 
+				ng-href="{{appInfo.subHeading.githubprofile}}" 
+				target="blank" title="Yacub93"><i class="fa fa-github"></i></a>
+
+				<a class="btn-lg" 
+				ng-href="{{appInfo.subHeading.linkedinprofile}}" 
+				target="blank" title="Yacub Ali"><i class="fa fa-linkedin"></i></a>
+			</div>
+		</div>
+	</div>
+<!-- </div> -->
+
+
+<div class="ng-view"></div>
+
+
 
         <!-- Menu Toggle Script -->
     <script>
