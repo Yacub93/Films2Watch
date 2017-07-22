@@ -100,9 +100,9 @@ filmApp.controller('PanelController',[function(){
   function search($q, $http) {
     var cachedSearches = {};
     var lastSearch;
+
     return {
       getLastSearch: function() {
-        console.log("lastSearch "+lastSearch);
         return lastSearch;
       },
       get: function (query) {
@@ -120,6 +120,7 @@ filmApp.controller('PanelController',[function(){
             api_key: apiKey
           }
         }).then(function (response) {
+
           var results = response.data.results.filter(function (result) {
             return result.original_title.toLowerCase().indexOf(normalizedQuery) !== -1;
           }).map(function (result) {
@@ -137,20 +138,14 @@ filmApp.controller('PanelController',[function(){
     }
 
   }
-// make a factory to share data between controllers
+// make a factory to share data
   filmApp.factory('search', search);
-  // filmApp.factory('search', function(){
-  //     return {
-  //     data: function get() {
-  //     }
-  // };
-  // });
 
-  SearchController.$inject = ['$scope', 'search', '$log'];
-  function SearchController($scope, search, $log) {
-    $scope.results = {
-      values:[]
-    };
+
+  SearchController.$inject = ['$scope', 'search', '$log','$http'];
+  function SearchController($scope, search, $log, $http) {
+
+
     var vm = this;
     vm.querySearch   = search.get;
     vm.searchTextChange = $scope.searchTextChange;
@@ -158,30 +153,10 @@ filmApp.controller('PanelController',[function(){
 
 
 
-// function selectedItemChange(item) {
-//   //TODO: return film data based on selection
-//   $scope.value = JSON.stringify(item);
-//       $log.info('Item changed to ' + $scope.value);
-//       return search.get($scope.value).then(function (results) {
-//         $scope.results = results;
+   $scope.filmInfo=[];
 
-//       });  
-// }
 
-   // $scope.querySearch = function (item) {
-   //  $scope.value = JSON.stringify(item);
-   //    // $log.info('Item changed to ' + $scope.value);
-   //      return search.get($scope.value).then(function (results) {
-   //      $scope.results = results;
-   //    for (var i = 0; i < $scope.results.length; i++) {
-   //         $scope.results.values.push({title: data.results[i].original_title});
-   //         // $log.info($scope.results.values);   
-   //     }
-   //     return $scope.results.values;
-      
-   //    });
-   //  }
-
+   
     $scope.searchTextChange = function (text) {
         // $log.info('Search Text changed to ' + text);
     }
@@ -190,25 +165,97 @@ filmApp.controller('PanelController',[function(){
     $scope.selectedItemChange = function (item) {
       $scope.value = JSON.stringify(item);
       $log.info('Item changed to ' + $scope.value);
-        return search.get($scope.value).then(function (results) {
-          $scope.results = results;
-
+      //   return search.get(item).then(function (results) {
+      //     // $rootScope.filmInfo.values = results;
+      //     $scope.results = results;
       
+      // });
+      return querySearch(item).then(function (results){
+        $scope.filmInfo.values = results;
+            $scope.results = results;
       });
-    }
+ 
+}//.Close selectedItemChange()
 
-  }
+
+  function querySearch(query) {
+   return $http.get('https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&primary_release_year=2017', {
+         params: { 
+             'query': query,
+             'api_key': apiKey
+         }
+  }).then(function(response) {
+      var data = response.data;
+    //    var data = response.data.results.filter(function(obj) {
+    //     // $log.info(obj);
+    //     return obj.original_title.toLowerCase().indexOf(query) !== -1;
+    // });
+       $log.info(data);
+    // return data;
+
+        for (var i = 0; i < data.results.length; i++) {
+           $scope.filmInfo.push({title: data.results[i].original_title,
+                                 release: data.results[i].release_date,
+                                 info:    data.results[i].overview,
+                                 poster:  baseImgURL+data.results[i].poster_path});
+           console.log($scope.filmInfo);   
+       }
+       return $scope.filmInfo;
+    });
+  } 
+          
+}
 
   filmApp.controller('SearchController', SearchController);
 
 }());
 
+//MAKE NEW $HTTP REQUEST USING FILM TITLE AS QUERY
 
-// SingleFilmController.$inject = ['$scope', 'search', '$log', '$rootScope'];
+
+
+
+
+
+
+// SingleFilmController.$inject = ['$scope', 'search', '$log','$rootScope'];
 // function SingleFilmController($scope, search, $log, $rootScope) {
-// // $scope.results = $rootScope.search.get;
 
-// // $log.info("SingleFilmController: " + $scope.results);
+//     // $scope.results = {
+//     //   values: []
+//     // };
+
+
+//  function querySearch(query) {
+//    return $http.get('https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&primary_release_year=2017', {
+//          params: { 
+//              'query': query,
+//              'api_key': apiKey
+//          }
+//   }).then(function(response) {
+//        var data = response.data.results.filter(function(obj) {
+//         // $log.info(obj);
+//         // return obj.original_title.toLowerCase().indexOf(query) != -1;
+//     })
+//        // $log.info(data);
+//     // return data;
+
+//         for (var i = 0; i < data.results.length; i++) {
+//            // $scope.results.values.push({title: data.results[i].original_title});
+//            // $log.info($scope.results.values);   
+//        }
+//        // return $scope.results.values;
+//     })
+// };
+
+
+
+
+
+
+
+
+// $log.info("SingleFilmController: " + $scope.results);
 
 // };  
 
@@ -220,8 +267,31 @@ filmApp.controller('PanelController',[function(){
 
 
 
-// filmApp.controller('singleFilmController',['$scope','search', function($scope,search){
+// filmApp.controller('SingleFilmController',['$scope', '$http','$log','search',function($scope,$http,$log,search){
+  
+//     $scope.results = {
+//       values: []
+//     };
 
-// var value = search.results;
-// console.log("Value Found: "+ value);
+//  function querySearch(query) {
+//    return $http.get('https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&primary_release_year=2017', {
+//          params: { 
+//              'query': query,
+//              'api_key': apiKey
+//          }
+//   }).then(function(response) {
+//        var data = response.data.results.filter(function(obj) {
+//         // $log.info(obj);
+//         // return obj.original_title.toLowerCase().indexOf(query) != -1;
+//     })
+//        // $log.info(data);
+//     // return data;
+
+//         for (var i = 0; i < data.results.length; i++) {
+//            $scope.results.values.push({title: data.results[i].original_title});
+//            // $log.info($scope.results.values);   
+//        }
+//        // return $scope.results.values;
+//     })
+// };
 // }]);

@@ -1,6 +1,6 @@
 //Single film Page controller
 
-filmApp.controller('singleFilmController',['$scope', '$http', function($scope,$http){ 
+// filmApp.controller('singleFilmController',['$scope', '$http', function($scope,$http){ 
   // Simple GET request example:
   // $http({
   //       method: 'GET',
@@ -23,4 +23,4 @@ filmApp.controller('singleFilmController',['$scope', '$http', function($scope,$h
   //             	}
   // });
 
-}]);
+// }]);
