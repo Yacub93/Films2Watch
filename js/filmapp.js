@@ -153,7 +153,28 @@ filmApp.controller('PanelController',[function(){
 
 
 
-   $scope.filmInfo=[];
+   $scope.filmInfo = [];//store film data
+   $scope.genres = [
+          {"id": 28,"name": "Action"},
+          {"id": 12,"name": "Adventure"},
+          {"id": 16,"name": "Animation"},
+          {"id": 35,"name": "Comedy"},
+          {"id": 80,"name": "Crime"},
+          {"id": 99,"name": "Documentary"},
+          {"id": 18,"name": "Drama"},
+          {"id": 10751,"name": "Family"},
+          {"id": 14,"name": "Fantasy"},
+          {"id": 10769,"name": "Foreign"},
+          {"id": 36,"name": "History"},
+          {"id": 27,"name": "Horror"},
+          {"id": 10402,"name": "Music"},
+          {"id": 9648,"name": "Mystery"},
+          {"id": 10749,"name": "Romance"},
+          {"id": 878,"name": "Science Fiction"},
+          {"id": 10770,"name": "TV Movie"},
+          {"id": 53,"name": "Thriller"},
+          {"id": 10752,"name": "War"},
+          {"id": 37,"name": "Western"}];
 
 
    
@@ -164,14 +185,14 @@ filmApp.controller('PanelController',[function(){
 
     $scope.selectedItemChange = function (item) {
       $scope.value = JSON.stringify(item);
-      $log.info('Item changed to ' + $scope.value);
-      //   return search.get(item).then(function (results) {
-      //     // $rootScope.filmInfo.values = results;
-      //     $scope.results = results;
       
-      // });
+      if (typeof $scope.value == 'undefined' || $scope.value == null || $scope.value == "")
+      {
+        $scope.filmInfo = []; // Clear when search is reset 
+        return false;
+      }
+      $log.info('Item changed to ' + $scope.value);
       return querySearch(item).then(function (results){
-        $scope.filmInfo.values = results;
             $scope.results = results;
       });
  
@@ -186,19 +207,30 @@ filmApp.controller('PanelController',[function(){
          }
   }).then(function(response) {
       var data = response.data;
-    //    var data = response.data.results.filter(function(obj) {
-    //     // $log.info(obj);
-    //     return obj.original_title.toLowerCase().indexOf(query) !== -1;
-    // });
        $log.info(data);
-    // return data;
+      var genreNames = []; // Genre string values
+
+    for (var i = 0; i < $scope.genres.length; i++) {
+      for (var j = 0; j < data.results.length; j++) {
+                // $log.info($scope.genres[i].id);
+                // $log.info(data.results[j].genre_ids);
+        if (data.results[j].genre_ids.includes($scope.genres[i].id)) {
+              // console.log("found One " + $scope.genres[i].name );
+              genreNames.push($scope.genres[i].name);
+            }   
+        }
+      }
 
         for (var i = 0; i < data.results.length; i++) {
+
            $scope.filmInfo.push({title: data.results[i].original_title,
                                  release: data.results[i].release_date,
                                  info:    data.results[i].overview,
-                                 poster:  baseImgURL+data.results[i].poster_path});
-           console.log($scope.filmInfo);   
+                                 poster:  baseImgURL+data.results[i].poster_path,
+                                 genres: genreNames.toString()});
+
+           $log.info($scope.filmInfo);    
+
        }
        return $scope.filmInfo;
     });
@@ -210,7 +242,7 @@ filmApp.controller('PanelController',[function(){
 
 }());
 
-//MAKE NEW $HTTP REQUEST USING FILM TITLE AS QUERY
+
 
 
 

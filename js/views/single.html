@@ -35,23 +35,57 @@
 
 <br><br><br><br>
 
-<!-- <div id="singleFilm">
+
+<!--Card-->
+<div class="card" ng-repeat="result in filmInfo">
+    <img class="img-fluid" ng-src="{{ result.poster }}">
+    <!--Card image-->
+<!--     <div class="view overlay hm-white-slight">
+        
+        <a href="#">
+            <div class="mask waves-effect waves-light"></div>
+        </a>
+    </div> -->
+    <!--/.Card image-->
+
+    <!--Card content-->
+    <div class="card-block">
+        <!--Title-->
+        <h4 class="card-title">{{ result.title }}</h4>
+        <!--Text-->
+        <p class="card-text">{{ result.info }}</p>
+        <ul class="card-text">
+            <li>Release: {{result.release |  date:  "dd.MM.y" : UTC+00:00 }}</li>
+            <li>Genre: {{ result.genres }}</li>
+        </ul>
+        <a href="#" class="btn btn-primary">View More</a>
+    </div>
+    <!--/.Card content-->
+
+</div>
+<!--/.Card-->
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div id="singleFilm">
     <div class="row">
-        <div class="col-md-3 film-item">
-            <img ng-src="{{result.image}}" class="image">
-            <div class="overlay"> -->
+        <div class="col-md-3">
+            <div class="overlay">
     			<div class="items" ng-repeat="result in filmInfo">
-    				<!-- <h3>{{result.title}}</h3> -->
-    			    <!-- <p>{{result.release |  date:  "dd.MM.y" : UTC+00:00 }}</p> -->
-    			    <!-- <p>{{result.release |  date:  "yyyy" : UTC+00:00 }}</p> -->
-    			    <!-- <h2 class="text-center">Film Title: {{ filmInfo.values["title"]}}</h2> -->
-              <!-- <h2 class="text-center">Film Title: {{ results }}</h2> -->
-              <h5 class="text-center">{{ result.title }}</h5>
-              <h5 class="text-center">{{result.release |  date:  "dd.MM.y" : UTC+00:00 }}</h5>
-              <p class="text-center">{{ result.info }}</p>
-              <img class="text-center" ng-src="{{result.poster}}">
+            <h3 class="text-center">{{ result.title }}</h3>
+            <h4 class="text-center">{{result.release |  date:  "dd.MM.y" : UTC+00:00 }}</h4>
+            <p class="text-center">{{ result.info }}</p>
+              <img ng-src="{{result.poster}}">
     			</div>
-<!--          	</div>
+         	</div>
        </div> 
     </div> 
 </div> -->
