@@ -1,10 +1,7 @@
 	var apiKey = "d313b5dab4af5c3ad0636657c1efb5b4"; //v3 auth
-	// var apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMzEzYjVkYWI0YWY1YzNhZDA2MzY2NTdjMWVmYjViNCIsInN1YiI6IjU5NWU0YWYyOTI1MTQxMGM1NjA4NDNjOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eSmWezzSAKWNn-4bkgV17KLfTShzeF4grZAg7FqCISQ";//v4 auth
+	var movieDBURL = 'https://api.themoviedb.org/3/movie/upcoming?api_key='+apiKey+'&language=en-US&page=1&region=US';
 
-	// var movieDBURL = "https://api.themoviedb.org/3/movie/500?api_key=" + apiKey;
-	// var movieDBURL = "https://www.themoviedb.org/auth/access?request_token="+ apiKey;
-	var movieDBURL = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+apiKey+'&language=en-UK&page=1&region=US';
-	var movieDBURL2 = 'https://api.themoviedb.org/3/movie/popular?api_key='+apiKey+'&language=en-UK&page=1&region=US';
+	var movieDBURL2 = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+apiKey+'&language=en-US&page=1';
 	var baseImgURL = "http://image.tmdb.org/t/p/w185";
 
 var filmApp = angular.module('filmApp', ['ngMaterial','ngAnimate', 'ngRoute']);
@@ -17,34 +14,37 @@ filmApp.config(['$routeProvider', function($routeProvider){
         		templateUrl : 'js/views/single.html',
         		controller  : 'SearchController'
         	})	
-            .when('/about', {
+          .when('/about', {
                 templateUrl : 'js/views/about.html',
                 controller  : 'aboutController'
-            })
-            .when('/top-rated', {
+          })
+          .when('/watch-list', {
+                templateUrl : 'js/views/watch-list.html'
+                
+          })
+          .when('/top-rated', {
                 templateUrl : 'js/views/main.html',
                 controller  : 'listFilmController'
-            }).otherwise({
+          }).otherwise({
             	redirectTo: '/'
-            });
-
+          });
 }]);
 
 
 // List of Popular films Page controller
 filmApp.controller('listFilmController',['$scope', '$http', function($scope,$http){	
 
-	$scope.results  = [];
+	$scope.results1  = [];
 	$scope.results2 = [];
 
 
-// Now Playing
+// Get Latest Movies
 $http.get(movieDBURL).success(function(data) {
 
-	var results = [];
+	// var results = [];
 
           for (var i = 0; i < data.results.length; i++) {
-          	$scope.results.push({title: data.results[i].original_title,
+          	$scope.results1.push({title: data.results[i].original_title,
           						image: baseImgURL + data.results[i].poster_path,
           						release: data.results[i].release_date});
 
@@ -78,18 +78,18 @@ filmApp.controller('PanelController',[function(){
 }]);//.Page Controller
 
 
-// filmApp.controller('aboutController',['$scope', function($scope){
+filmApp.controller('aboutController',['$scope', function($scope){
 
-// 	// About Info
-// 	$scope.appInfo = {
-// 		heading: "About Page",
-// 		subHeading: {
-// 	      githubprofile: "https://github.com/Yacub93",
-// 	      linkedinprofile: "https://uk.linkedin.com/in/yacub-ali-4898b9103"
-// 	    }
-// 	};
+	// About Info
+	$scope.appInfo = {
+		heading: "About Films2Watch",
+		subHeading: {
+	      githubprofile: "https://github.com/Yacub93",
+	      linkedinprofile: "https://uk.linkedin.com/in/yacub-ali-4898b9103"
+	    }
+	};
 
-// }]);
+}]);
 
 
 
@@ -109,12 +109,11 @@ filmApp.controller('PanelController',[function(){
         var normalizedQuery = query && query.toLowerCase();
         if (cachedSearches[normalizedQuery]) {
           lastSearch = cachedSearches[normalizedQuery];
-          // console.log(lastSearch);
           return $q.when(lastSearch);
         }
 
         return $http.get('https://api.themoviedb.org/3/search/movie?' + 
-            'include_adult=false&page=1&primary_release_year=2017', {
+            'include_adult=false&page=1&year=2017', {
           params: {
             query: query,
             api_key: apiKey
@@ -124,26 +123,22 @@ filmApp.controller('PanelController',[function(){
           var results = response.data.results.filter(function (result) {
             return result.original_title.toLowerCase().indexOf(normalizedQuery) !== -1;
           }).map(function (result) {
-            // console.log(result.original_title);
             return result.original_title;
           });
 
           cachedSearches[normalizedQuery] = results;
 
           lastSearch = results;
-          // console.log(lastSearch);
           return results;
         });
       }
     }
-
   }
 // make a factory to share data
   filmApp.factory('search', search);
 
-
-  SearchController.$inject = ['$scope', 'search', '$log','$http'];
-  function SearchController($scope, search, $log, $http) {
+  SearchController.$inject = ['$scope', 'search', 'filmService','$log','$http'];
+  function SearchController($scope, search, filmService, $log, $http) {
 
 
     var vm = this;
@@ -153,7 +148,7 @@ filmApp.controller('PanelController',[function(){
 
 
 
-   $scope.filmInfo = [];//store film data
+   $scope.filmInfo = [];// Store film data
    $scope.genres = [
           {"id": 28,"name": "Action"},
           {"id": 12,"name": "Adventure"},
@@ -200,26 +195,24 @@ filmApp.controller('PanelController',[function(){
 
 
   function querySearch(query) {
-   return $http.get('https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&primary_release_year=2017', {
+   return $http.get('https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&year=2017', {
          params: { 
              'query': query,
              'api_key': apiKey
          }
   }).then(function(response) {
       var data = response.data;
-       $log.info(data);
+      // $log.info(data);
       var genreNames = []; // Genre string values
 
     for (var i = 0; i < $scope.genres.length; i++) {
       for (var j = 0; j < data.results.length; j++) {
-                // $log.info($scope.genres[i].id);
-                // $log.info(data.results[j].genre_ids);
-        if (data.results[j].genre_ids.includes($scope.genres[i].id)) {
-              // console.log("found One " + $scope.genres[i].name );
-              genreNames.push($scope.genres[i].name);
-            }   
-        }
+        if (data.results[j].genre_ids.includes($scope.genres[i].id)) 
+        {
+                genreNames.push($scope.genres[i].name);
+        }   
       }
+    }
 
         for (var i = 0; i < data.results.length; i++) {
 
@@ -227,103 +220,85 @@ filmApp.controller('PanelController',[function(){
                                  release: data.results[i].release_date,
                                  info:    data.results[i].overview,
                                  poster:  baseImgURL+data.results[i].poster_path,
-                                 genres: genreNames.toString()});
-
-           $log.info($scope.filmInfo);    
-
+                                 genres:  genreNames.toString()});
+           // $log.info($scope.filmInfo[0]);    
        }
+        filmService.filmData = $scope.filmInfo;
        return $scope.filmInfo;
     });
-  } 
-          
+  }          
 }
-
-  filmApp.controller('SearchController', SearchController);
-
+  filmApp.controller('SearchController', SearchController)
+  .service('filmService', function () {
+      this.filmData = null;
+  });
 }());
 
 
 
+WatchListController.$inject = ['$scope', 'filmService', '$log','$http'];
+function WatchListController($scope, filmService, $log, $http) {
+
+
+vm = this;
+vm.filmData = [];
+vm.Title = 'My Watch List';
+// vm.getSelectedFilm = getSelectedFilm;
+// console.log("FILMSERVICE: " + filmService);
+
+// if (typeof filmService != 'undefined' || filmService != null || filmService != [])
+
+//   $scope.insertFilm = function () {  
+//      console.log("Film saved in watch list!");
+//      getSelectedFilm();
+// }
+
+// function getSelectedFilm() {
+    for (var i = 0; i < filmService.filmData.length; i++) {
+      vm.filmData.push({
+        title     :    filmService.filmData[i].title,
+        overview  :    filmService.filmData[i].info,
+        poster    :    filmService.filmData[i].poster,
+        genres    :    filmService.filmData[i].genres,
+        release   :    filmService.filmData[i].release,
+
+      });    
+      $log.info(vm.filmData[0]);
+  }
+  // return vm.filmData[0];
+// }
+
+
+// $log.info(vm.filmData[0]);
+
+// getSelectedFilm($scope.filmData[0]);
+// $scope.getSelectedFilm = function(){
+// function getSelectedFilm(film) {
+  // console.log("getSelectedFilm: "+ film);
+    // var film = {
+    //   title:     film.title,
+    //   overview:  film.overview,
+    //   poster:    film.poster,
+    //   genres:    film.genres,
+    //   release:   film.release
+    // };
+    // $log.info(vm.chosenFilm[film]);
+  // vm.chosenFilm[film];
+// }
 
 
 
+  // $scope.insertFilm = function () {
+  //       console.log("Favourite button!");
+  //       // $http.post('/#/search', $scope.filmData[0]);
+  //       //  $http({
+  //       //     url: '/db/mongodb.insert.js',
+  //       //     method: "POST",
+  //       //     data: {data: $scope.filmData[0]}
+  //       // }).success(function(data){
+  //       //        console.log(data);
+  //       //     });
+  // }
 
-
-
-// SingleFilmController.$inject = ['$scope', 'search', '$log','$rootScope'];
-// function SingleFilmController($scope, search, $log, $rootScope) {
-
-//     // $scope.results = {
-//     //   values: []
-//     // };
-
-
-//  function querySearch(query) {
-//    return $http.get('https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&primary_release_year=2017', {
-//          params: { 
-//              'query': query,
-//              'api_key': apiKey
-//          }
-//   }).then(function(response) {
-//        var data = response.data.results.filter(function(obj) {
-//         // $log.info(obj);
-//         // return obj.original_title.toLowerCase().indexOf(query) != -1;
-//     })
-//        // $log.info(data);
-//     // return data;
-
-//         for (var i = 0; i < data.results.length; i++) {
-//            // $scope.results.values.push({title: data.results[i].original_title});
-//            // $log.info($scope.results.values);   
-//        }
-//        // return $scope.results.values;
-//     })
-// };
-
-
-
-
-
-
-
-
-// $log.info("SingleFilmController: " + $scope.results);
-
-// };  
-
-// filmApp.controller('SingleFilmController', SingleFilmController);
-
-
-
-
-
-
-
-// filmApp.controller('SingleFilmController',['$scope', '$http','$log','search',function($scope,$http,$log,search){
-  
-//     $scope.results = {
-//       values: []
-//     };
-
-//  function querySearch(query) {
-//    return $http.get('https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&primary_release_year=2017', {
-//          params: { 
-//              'query': query,
-//              'api_key': apiKey
-//          }
-//   }).then(function(response) {
-//        var data = response.data.results.filter(function(obj) {
-//         // $log.info(obj);
-//         // return obj.original_title.toLowerCase().indexOf(query) != -1;
-//     })
-//        // $log.info(data);
-//     // return data;
-
-//         for (var i = 0; i < data.results.length; i++) {
-//            $scope.results.values.push({title: data.results[i].original_title});
-//            // $log.info($scope.results.values);   
-//        }
-//        // return $scope.results.values;
-//     })
-// };
-// }]);
+}
+filmApp.controller('WatchListController', WatchListController);

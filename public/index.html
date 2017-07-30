@@ -2,7 +2,7 @@
 <html lang="en" ng-app="filmApp">
 <head>
 	<meta charset="UTF-8">
-	<title>Films2Watch App</title>
+	<title>Films2Watch</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
 
@@ -57,7 +57,7 @@
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="#">Watch list</a>
+	                    <a href="#/watch-list">Watch list</a>
 	                </li>
 	                <li>
 	                    <a href="#/top-rated">Top rated</a>
@@ -77,15 +77,6 @@
 		<div class="container-fluid">
 			<a href="#menu-toggle" class="fa fa-bars" id="menu-toggle"></a>
 			<h1>{{appInfo.heading}}</h1>
-			<div>
-				<a class="btn-lg" 
-				ng-href="{{appInfo.subHeading.githubprofile}}" 
-				target="blank" title="Yacub93"><i class="fa fa-github"></i></a>
-
-				<a class="btn-lg" 
-				ng-href="{{appInfo.subHeading.linkedinprofile}}" 
-				target="blank" title="Yacub Ali"><i class="fa fa-linkedin"></i></a>
-			</div>
 		</div>
 	</div>
 <!-- </div> -->
@@ -100,6 +91,7 @@
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
+
     });
     </script>
 

@@ -2,14 +2,16 @@
   "name": "filmapp",
   "version": "1.0.0",
   "description": "Film Search App",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "lite-server"
   },
   "author": "Yacub Ali",
   "license": "ISC",
   "dependencies": {
-    "angucomplete-alt": "^3.0.0",
     "lite-server": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

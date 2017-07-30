@@ -1,0 +1,26 @@
+<div class="container" ng-controller='WatchListController as vm'>
+<h2>{{vm.Title}}</h2>
+		<table class="table" ng-repeat="film in vm.filmData">
+		  <thead>
+		    <tr>
+		      <th>Film</th>
+		      <th>Poster</th>
+		      <th>Overview</th>
+		      <th>Genres</th>
+		      <th>Release</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>{{film.title}}</td>
+		      <td><img ng-src="{{film.poster}}"></td>
+		      <td>{{film.overview}}</td>
+		      <td>{{film.genres}}</td>
+		      <td>{{film.release |  date:  "dd.MM.y" : UTC+00:00 }}</td>
+		    </tr>
+		  </tbody>
+		</table>
+</div>
+
+</div>
+<!-- /#wrapper -->

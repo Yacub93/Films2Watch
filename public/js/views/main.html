@@ -1,0 +1,53 @@
+
+<div ng-controller='PanelController as panel'>
+	<div class="nav-bar">
+	    <ul class="nav nav-pills">
+	      <li ng-class="{active: panel.isSelected(1) } ">
+	        <a data-toggle="pill" class="nav-link fa fa-fire" ng-href="tabHot" ng-click="panel.selectTab(1)">Now Playing</a>
+	      </li>
+	      <li ng-class="{active: panel.isSelected(2) }">
+	        <a data-toggle="pill" class="nav-link fa fa-globe" ng-href="tabUpcoming" ng-click="panel.selectTab(2)">Upcoming</a>
+	      </li>
+	    </ul>
+    </div>
+
+
+
+<!-- Film Grid1 -->
+ <!-- .tabOne -->
+<div id="Film" class="tabHot" ng-show='panel.isSelected(1)'>
+       <div class="row">
+        <div class="col-md-3 film-item" ng-repeat="result in results2">
+            <img ng-src="{{result.image}}" class="image">
+              <div class="overlay">
+    			<div class="text">
+    				<h3>{{result.title}}</h3>
+    			    <p>{{result.release |  date:  "yyyy" : UTC+00:00 }}</p>
+    			</div>
+         </div>
+       </div> 
+  </div> 
+</div>
+  <!-- .Close tabOne -->
+
+
+<!-- Film Grid2 -->
+ <!-- .tabTwo -->
+<div id="Film" class="tabUpcoming" ng-show='panel.isSelected(2)'>
+       <div class="row">
+        <div class="col-md-3 film-item" ng-repeat="result in results1">
+            <img ng-src="{{result.image}}" class="image">
+              <div class="overlay">
+    			<div class="text">
+    				<h3>{{result.title}}</h3>
+    			    <p>{{result.release |  date:  "yyyy" : UTC+00:00 }}</p>
+    			</div>
+         </div>
+       </div> 
+  </div> 
+</div>
+  <!-- .Close tabTwo -->
+</div>
+
+</div>
+    <!-- /#wrapper -->

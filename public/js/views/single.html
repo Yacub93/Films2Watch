@@ -1,0 +1,70 @@
+ <!-- .Single View -->
+		<!-- Film Search autocomplete -->
+<div layout="row" ng-controller="SearchController as ctrl">
+      <md-content class="md-padding" flex>
+            <div layout-gt-sm="row">
+          <md-autocomplete 
+          	  placeholder="Search films in theaters" 
+              flex=""
+              md-autofocus="true"
+              md-autoselect="true"
+              md-clear-button="true"
+              md-select-on-match=true
+              md-no-cache="ctrl.noCache"
+              md-items="item in ctrl.querySearch(ctrl.searchText)"
+              md-item-text="item"
+              md-search-text="ctrl.searchText"
+              md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+              md-selected-item-change="ctrl.selectedItemChange(item)"
+              md-selected-item="ctrl.selectedItem"
+              md-min-length="2">
+            <md-item-template>
+              <span class="item">
+                <span md-highlight-flags="^i" md-highlight-text="ctrl.searchText">
+                  {{item}}
+                </span>
+              </span>
+            </md-item-template>
+            <md-not-found>
+              No match found.
+            </md-not-found>
+          </md-autocomplete>
+          </div>
+      </md-content>
+</div>
+
+<br><br>
+
+      <div class="row row-margin-bottom" ng-repeat="result in filmInfo">
+            <div class="col-md-5 no-padding lib-item" data-category="view">
+                <div class="lib-panel">
+                    <div class="row box-shadow">
+                        <div class="col-md-6">
+                            <img class="lib-img-show" ng-src="{{ result.poster }}">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="lib-row lib-header" ng-controller="WatchListController">
+                                {{ result.title }}                               
+                                ({{result.release |  date:  "yyyy" : UTC+00:00 }})
+                                <a class="btn btn-lg" ng-click="insertFilm()">
+                                  <i class="fa fa-heart"></i>
+                                </a>
+                                <div class="lib-header-seperator"></div>
+                            </div>
+                            <div class="lib-row lib-desc">
+                                <h2>Overview</h2> 
+                                {{ result.info }}
+                                
+                                    {{result.release |  date:  "dd.MM.y" : UTC+00:00 }}
+                              <ul>
+                                <li>{{ result.genres }}</li>
+                              </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <!-- .Close Single Card View -->
+</div>
+<!-- /#wrapper -->
