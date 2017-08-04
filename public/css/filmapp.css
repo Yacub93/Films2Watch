@@ -242,6 +242,6 @@ a.btn-lg.btn-primary:hover{
 
 
 /* Favourite button */
-.fa.fa-heart:hover{
-  color: red ; 
+.fa.fa-plus:hover{
+  color: green ; 
 }

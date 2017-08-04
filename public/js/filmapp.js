@@ -19,7 +19,8 @@ filmApp.config(['$routeProvider', function($routeProvider){
                 controller  : 'aboutController'
           })
           .when('/watch-list', {
-                templateUrl : 'js/views/watch-list.html'
+                templateUrl : 'js/views/watch-list.html',
+                controller  : 'WatchListController'
                 
           })
           .when('/top-rated', {
@@ -220,8 +221,7 @@ filmApp.controller('aboutController',['$scope', function($scope){
                                  release: data.results[i].release_date,
                                  info:    data.results[i].overview,
                                  poster:  baseImgURL+data.results[i].poster_path,
-                                 genres:  genreNames.toString()});
-           // $log.info($scope.filmInfo[0]);    
+                                 genres:  genreNames.toString()});   
        }
         filmService.filmData = $scope.filmInfo;
        return $scope.filmInfo;
@@ -236,69 +236,137 @@ filmApp.controller('aboutController',['$scope', function($scope){
 
 
 
-WatchListController.$inject = ['$scope', 'filmService', '$log','$http'];
-function WatchListController($scope, filmService, $log, $http) {
+WatchListController.$inject = ['$scope', 'filmService', '$log','$http','$httpParamSerializer'];
+function WatchListController($scope, filmService, $log, $http, $httpParamSerializer) {
 
 
-vm = this;
-vm.filmData = [];
-vm.Title = 'My Watch List';
+// vm = this;
+// $scope.Title = 'My Watch List';
+var filmData = [];
 // vm.getSelectedFilm = getSelectedFilm;
-// console.log("FILMSERVICE: " + filmService);
 
 // if (typeof filmService != 'undefined' || filmService != null || filmService != [])
+$scope.chosenFilm = [];
 
-//   $scope.insertFilm = function () {  
-//      console.log("Film saved in watch list!");
-//      getSelectedFilm();
-// }
 
-// function getSelectedFilm() {
-    for (var i = 0; i < filmService.filmData.length; i++) {
-      vm.filmData.push({
+//onClick function
+$scope.insertFilm = function () {  
+for (var i = 0; i < filmService.filmData.length; i++) {
+      filmData.push({
         title     :    filmService.filmData[i].title,
         overview  :    filmService.filmData[i].info,
         poster    :    filmService.filmData[i].poster,
         genres    :    filmService.filmData[i].genres,
-        release   :    filmService.filmData[i].release,
+        release   :    filmService.filmData[i].release
 
-      });    
-      $log.info(vm.filmData[0]);
-  }
-  // return vm.filmData[0];
+      }); 
+}
+  var data = angular.toJson(filmData[0]);
+
+  $http({
+        method: 'POST',
+        url:'/search',
+        data: data,
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+      },
+    }).then(function successCallback(response) {
+        var data = response.data
+        console.log(data); //response received
+});
+}
+  // var data = $httpParamSerializer({
+  //   title    : $scope.filmData[0].title,
+  //   overview : $scope.filmData[0].overview,
+  //   poster   : $scope.filmData[0].poster,
+  //   genres   : $scope.filmData[0].genres,
+  //   release  : $scope.filmData[0].release
+  // });
+
+  // console.log(data);
+
+// $http.post('/search', data).then(function successCallback(response) {
+//           // this callback will be called asynchronously
+//           // when the response is available
+//           console.log(response);
+
+// });
+    //  $http({
+    //         method: 'POST',
+    //         url:'/search',
+    //         data: { data },
+    //         headers: {
+    //           'Content-Type': 'application/json;charset=utf-8'
+    //       },
+    //     }).then(function successCallback(response) {
+    //         console.log(response);
+    // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+// getSelectedFilm();
+// $scope.getSelectedFilm = function () {
+// function getSelectedFilm() {
+
+  $http({
+        method: 'GET',
+        url: '/watch-list',
+        headers:{
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+      }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+            $scope.chosenFilm = angular.extend($scope.chosenFilm, response.data);     
+            // $log.info(response); // Values displayed in console!
+            $scope.chosenFilm; 
+
+      });
 // }
 
+// $scope.getSelectedFilm = function () {
+// function getSelectedFilm() {
+  //   for (var i = 0; i < filmService.filmData.length; i++) {
+  //     $scope.filmData.push({
+  //       title     :    filmService.filmData[i].title,
+  //       overview  :    filmService.filmData[i].info,
+  //       poster    :    filmService.filmData[i].poster,
+  //       genres    :    filmService.filmData[i].genres,
+  //       release   :    filmService.filmData[i].release
 
-// $log.info(vm.filmData[0]);
-
-// getSelectedFilm($scope.filmData[0]);
-// $scope.getSelectedFilm = function(){
-// function getSelectedFilm(film) {
-  // console.log("getSelectedFilm: "+ film);
-    // var film = {
-    //   title:     film.title,
-    //   overview:  film.overview,
-    //   poster:    film.poster,
-    //   genres:    film.genres,
-    //   release:   film.release
-    // };
-    // $log.info(vm.chosenFilm[film]);
-  // vm.chosenFilm[film];
-// }
-
-
-
-  // $scope.insertFilm = function () {
-  //       console.log("Favourite button!");
-  //       // $http.post('/#/search', $scope.filmData[0]);
-  //       //  $http({
-  //       //     url: '/db/mongodb.insert.js',
-  //       //     method: "POST",
-  //       //     data: {data: $scope.filmData[0]}
-  //       // }).success(function(data){
-  //       //        console.log(data);
-  //       //     });
+  //     });    
   // }
+  // $log.info($scope.filmData[0]);
+//   return $scope.filmData;
+// }
+
+// function getSelectedFilm() {
+//   console.log("getSelectedFilm called!");
+//     var film = {
+//         title     :    $scope.filmData[0].title,
+//         overview  :    $scope.filmData[0].overview,
+//         poster    :    $scope.filmData[0].poster,
+//         genres    :    $scope.filmData[0].genres,
+//         release   :    $scope.filmData[0].release
+//     };
+
+//     $log.info($scope.filmData[0]);
+//     $log.info(vm.chosenFilm = film);
+
+//     vm.chosenFilm = film;
+//     return vm.chosenFilm;
+// }
+
 
 }
 filmApp.controller('WatchListController', WatchListController);

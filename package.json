@@ -12,6 +12,8 @@
     "lite-server": "^2.3.0"
   },
   "devDependencies": {
+    "body-parser": "^1.17.2",
+    "mongoose": "^4.11.5",
     "nodemon": "^1.11.0"
   }
 }

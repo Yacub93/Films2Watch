@@ -35,8 +35,9 @@
 
 <br><br>
 
-      <div class="row row-margin-bottom" ng-repeat="result in filmInfo">
-            <div class="col-md-5 no-padding lib-item" data-category="view">
+
+  <div class="row row-margin-bottom" ng-repeat="result in filmInfo">
+        <div class="col-md-5 no-padding lib-item" data-category="view">
                 <div class="lib-panel">
                     <div class="row box-shadow">
                         <div class="col-md-6">
@@ -45,9 +46,9 @@
                         <div class="col-md-6">
                             <div class="lib-row lib-header" ng-controller="WatchListController">
                                 {{ result.title }}                               
-                                ({{result.release |  date:  "yyyy" : UTC+00:00 }})
+                                ({{ result.release |  date:  "yyyy" : UTC+00:00 }})
                                 <a class="btn btn-lg" ng-click="insertFilm()">
-                                  <i class="fa fa-heart"></i>
+                                  <i class="fa fa-plus"></i>
                                 </a>
                                 <div class="lib-header-seperator"></div>
                             </div>
@@ -63,8 +64,28 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
+  </div>
   <!-- .Close Single Card View -->
+
+<br><br><br><br>
+
+<!--   <div class="row row-margin-bottom" ng-repeat="add in filmInfo">
+    <div class="col-md-5">
+    <form>
+    Title: <input type="text" ng-value="{{ add.title }}"   ng-model="add.title">
+    Date: <input type="text"  ng-value="{{ add.release }}" ng-model="add.release">
+    Overview: <input type="text" ng-value="{{ add.info }}" ng-model="add.info">
+    Poster: <input type="text" ng-value="{{ add.poster }}" ng-model="add.poster">
+    <label for="repeatSelect"> Genres: </label>
+    <select name="repeatSelect" id="repeatSelect" ng-model="add.genres">
+      <option ng-repeat="add in filmInfo" ng-class='{"fa-sortup" : x && y, "fa-b": a && b}' value="{{add.genres}}">{{add.genres}}</option>
+    </select>
+
+    </form>
+    </div>
+  </div> -->
+
+
 </div>
 <!-- /#wrapper -->
