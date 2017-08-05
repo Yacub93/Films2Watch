@@ -236,16 +236,12 @@ filmApp.controller('aboutController',['$scope', function($scope){
 
 
 
-WatchListController.$inject = ['$scope', 'filmService', '$log','$http','$httpParamSerializer'];
-function WatchListController($scope, filmService, $log, $http, $httpParamSerializer) {
+WatchListController.$inject = ['$scope', 'filmService', '$log','$http','$route'];
+function WatchListController($scope, filmService, $log, $http, $route) {
 
 
-// vm = this;
-// $scope.Title = 'My Watch List';
+$scope.Title = 'My Watch List';
 var filmData = [];
-// vm.getSelectedFilm = getSelectedFilm;
-
-// if (typeof filmService != 'undefined' || filmService != null || filmService != [])
 $scope.chosenFilm = [];
 
 
@@ -274,49 +270,25 @@ for (var i = 0; i < filmService.filmData.length; i++) {
         var data = response.data
         console.log(data); //response received
 });
+    alert(filmData[0].title + " is saved in your Watch List!");
 }
-  // var data = $httpParamSerializer({
-  //   title    : $scope.filmData[0].title,
-  //   overview : $scope.filmData[0].overview,
-  //   poster   : $scope.filmData[0].poster,
-  //   genres   : $scope.filmData[0].genres,
-  //   release  : $scope.filmData[0].release
-  // });
-
-  // console.log(data);
-
-// $http.post('/search', data).then(function successCallback(response) {
-//           // this callback will be called asynchronously
-//           // when the response is available
-//           console.log(response);
-
-// });
-    //  $http({
-    //         method: 'POST',
-    //         url:'/search',
-    //         data: { data },
-    //         headers: {
-    //           'Content-Type': 'application/json;charset=utf-8'
-    //       },
-    //     }).then(function successCallback(response) {
-    //         console.log(response);
-    // });
 
 
-
-
-
-
-
-
-
-
-
-
-
-// getSelectedFilm();
-// $scope.getSelectedFilm = function () {
-// function getSelectedFilm() {
+$scope.deleteFilm = function (id, title) {
+  console.log("Film: "+ id);
+  console.log('Film:'+ title);
+     $http({
+            method: 'DELETE',
+            url:'/watch-list/'+id,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+          },
+        }).then(function successCallback(response) {
+            console.log(response);
+    });
+    alert(title + " is removed from your Watch List!");
+    $route.reload(); //re-render the current page
+}
 
   $http({
         method: 'GET',
@@ -332,41 +304,6 @@ for (var i = 0; i < filmService.filmData.length; i++) {
             $scope.chosenFilm; 
 
       });
-// }
-
-// $scope.getSelectedFilm = function () {
-// function getSelectedFilm() {
-  //   for (var i = 0; i < filmService.filmData.length; i++) {
-  //     $scope.filmData.push({
-  //       title     :    filmService.filmData[i].title,
-  //       overview  :    filmService.filmData[i].info,
-  //       poster    :    filmService.filmData[i].poster,
-  //       genres    :    filmService.filmData[i].genres,
-  //       release   :    filmService.filmData[i].release
-
-  //     });    
-  // }
-  // $log.info($scope.filmData[0]);
-//   return $scope.filmData;
-// }
-
-// function getSelectedFilm() {
-//   console.log("getSelectedFilm called!");
-//     var film = {
-//         title     :    $scope.filmData[0].title,
-//         overview  :    $scope.filmData[0].overview,
-//         poster    :    $scope.filmData[0].poster,
-//         genres    :    $scope.filmData[0].genres,
-//         release   :    $scope.filmData[0].release
-//     };
-
-//     $log.info($scope.filmData[0]);
-//     $log.info(vm.chosenFilm = film);
-
-//     vm.chosenFilm = film;
-//     return vm.chosenFilm;
-// }
-
 
 }
 filmApp.controller('WatchListController', WatchListController);

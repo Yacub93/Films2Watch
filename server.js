@@ -32,6 +32,19 @@ app.get('/watch-list', function(req, res) {
 
 });
 
+// DELETE Films!
+app.delete('/watch-list/:id', function (req, res) {
+		var filmId = req.params.id;
+		console.log(filmId);
+
+	Film.collection.remove({'_id': mongoose.Types.ObjectId(filmId)}, function (err, docs) {
+        console.log(docs);
+        res.json(docs);
+    });
+
+});
+
+// POST Films!
 app.post('/search', function (req, res) {
 
 	console.log(req.body);
@@ -42,45 +55,6 @@ app.post('/search', function (req, res) {
     });
 
 });
-
-	// var addFilm = new Film(req.body);
-
-	// addFilm.save(function (err) {
-		
-	// 	if (err) 
-	// 	{
-	// 		console.log(err);
-	// 	}
-	// 	console.log(res.json);
-	// 	res.json(addFilm);
-	// });
-
-    // Film.collection.insert(req.body, function (err, docs) {
-    //     console.log(docs);
-    //     res.json(docs);
-    // });
-
-
-  //   var film1 = {
-  //       title    : "Spiderman: Homecoming",
-  // 		poster   : "http://image.tmdb.org/t/p/w185/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg",
-  // 		overview : "Spiderman new film",
-  // 		genres   : "Action,Adventure,Science Fiction",
-  // 		release  : '2017/07/01'
-  //   };
-
-  //   var film2 = {
-  //       title    : "Beauty and the Beast",
-  // 		poster   : "http://image.tmdb.org/t/p/w185/tWqifoYuwLETmmasnGHO7xBjEtt.jpg",
-  // 		overview : "Disney new film",
-  // 		genres   : "Family,Fantasy,Romance",
-  // 		release  : '2017/02/01'
-  //   };
-
-  // var chosenFilm = [film1,film2];
-  // res.json(chosenFilm);
-
-
 
 var port = 3000; //port number
 
