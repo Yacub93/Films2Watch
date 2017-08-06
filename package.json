@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
     "mongoose": "^4.11.5",
     "nodemon": "^1.11.0"
   }

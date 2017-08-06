@@ -253,7 +253,8 @@ for (var i = 0; i < filmService.filmData.length; i++) {
         overview  :    filmService.filmData[i].info,
         poster    :    filmService.filmData[i].poster,
         genres    :    filmService.filmData[i].genres,
-        release   :    filmService.filmData[i].release
+        release   :    filmService.filmData[i].release,
+        marked    :    false
 
       }); 
 }
@@ -288,6 +289,63 @@ $scope.deleteFilm = function (id, title) {
     });
     alert(title + " is removed from your Watch List!");
     $route.reload(); //re-render the current page
+}
+
+
+
+$scope.markAsWatched = function (id, marked) {
+$scope.customStyle = {};
+
+
+$scope.state.check = localStorage.getItem("check") ? 
+JSON.parse(localStorage.getItem("check")) : false;
+
+$scope.$watch("state.check", function (newVal, oldVal) {
+  if (oldVal !== newVal) {
+    localStorage.setItem("check", newVal);
+  }
+
+});
+
+
+   var isMarked = marked; 
+   
+
+ if (isMarked === false) {
+    $log.info('Film marked as WATCHED: ' + isMarked);
+     isMarked = true;
+     // $log.info(isMarked);
+     $http({
+            method: 'PUT',
+            url:'/watch-list/'+id+'/'+isMarked,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+          },
+        }).then(function successCallback(response) {
+            console.log(response.data.marked);
+    });
+    // $route.reload();
+    // $scope.customStyle.style = {"color":"#2ecc71"};
+    // document.getElementById("check").focus($scope.customStyle.style);
+}
+
+ else if(isMarked === true){
+   $log.info('Film marked as NOT WATCHED: ' + isMarked);
+     isMarked = false;
+     // $log.info(isMarked);
+     $http({
+            method: 'PUT',
+            url:'/watch-list/'+id+'/'+isMarked,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+          },
+        }).then(function successCallback(response) {
+            console.log(response.data.marked);
+      });
+      
+      // $route.reload();
+    }
+
 }
 
   $http({

@@ -1,12 +1,12 @@
-<div class="container">
-<h2>{{Title}}</h2>
-		<table class="table">
+<!-- <div class="container"> -->
+<h4>{{Title}}</h4>
+<!-- 		<table class="table">
 		  <thead>
 		    <tr>
 		      <th>Film</th>
 		      <th>Poster</th>
 		      <th>Overview</th>
-		      <th>Genres</th>
+		      <th>Genre</th>
 		      <th>Release</th>
 		      <th>Watched?</th>
 		      <th>Delete</th>
@@ -28,7 +28,37 @@
 		    </tr>
 		  </tbody>
 		</table>
+</div> -->
+
+<div class="center-card">
+
+        <div class="col-md-4" ng-repeat="film in chosenFilm">
+          <div class="profile-card text-center">
+            <img id="savedPoster" class="img-responsive" ng-src="{{film.poster}}">
+            <div class="profile-info">
+              <h2 class="hvr-underline-from-center">{{film.title}}<span>{{film.release |  date:  "dd.MM.y" : UTC+00:00 }}
+              </span></h2>
+              <h2 class="hvr-underline-from-center"><span>
+              {{film.genres}}</span></h2>
+              <div>{{film.overview}}</div>
+<!--               <a href="http://www.twitter.com/mike_youngg"><i class="fa fa-twitter fa-2x"></i></a> -->
+
+              <a data-ng-model="state.check" ng-click="markAsWatched(film._id,film.marked)"><i ng-style="customStyle.style" class="fa fa-check fa-2x"></i></a>
+
+              <a ng-click="deleteFilm(film._id,film.title)">
+                <i class="fa fa-trash fa-2x"></i></a>
+
+            </div>
+
+          </div>
+        </div>
 </div>
+
+
+
+
+
+
 
 </div>
 <!-- /#wrapper -->

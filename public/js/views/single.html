@@ -45,18 +45,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="lib-row lib-header" ng-controller="WatchListController">
-                                {{ result.title }}                               
-                                ({{ result.release |  date:  "yyyy" : UTC+00:00 }})
-                                <a class="btn btn-lg" ng-click="insertFilm()">
-                                  <i class="fa fa-plus"></i>
+                                <h3>{{ result.title }}                               
+                                ({{ result.release |  date:  "yyyy" : UTC+00:00 }})</h3>
+                                <a ng-click="insertFilm()" alt="Add to watch list">
+                                  <i class="fa fa-plus fa-lg"></i>
                                 </a>
                                 <div class="lib-header-seperator"></div>
                             </div>
                             <div class="lib-row lib-desc">
-                                <h2>Overview</h2> 
+                                <h6>Overview</h6> 
                                 {{ result.info }}
                                 
-                                    {{result.release |  date:  "dd.MM.y" : UTC+00:00 }}
+                                    <!-- {{result.release |  date:  "dd.MM.y" : UTC+00:00 }} -->
                               <ul>
                                 <li>{{ result.genres }}</li>
                               </ul>
