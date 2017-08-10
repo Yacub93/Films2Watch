@@ -1,38 +1,7 @@
-<!-- <div class="container"> -->
 <h4>{{Title}}</h4>
-<!-- 		<table class="table">
-		  <thead>
-		    <tr>
-		      <th>Film</th>
-		      <th>Poster</th>
-		      <th>Overview</th>
-		      <th>Genre</th>
-		      <th>Release</th>
-		      <th>Watched?</th>
-		      <th>Delete</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr ng-repeat="film in chosenFilm">
-		      <td>{{film.title}}</td>
-		      <td><img ng-src="{{film.poster}}"></td>
-		      <td>{{film.overview}}</td>
-		      <td>{{film.genres}}</td>
-		      <td>{{film.release |  date:  "dd.MM.y" : UTC+00:00 }}</td>
-		      <td><a class="btn btn-lg">
-                    <i class="fa fa-check"></i></a>
-              </td>
-		      <td><a class="btn btn-lg" ng-click="deleteFilm(film._id,film.title)">
-                    <i class="fa fa-trash"></i></a>
-              </td>
-		    </tr>
-		  </tbody>
-		</table>
-</div> -->
-
 <div class="center-card">
 
-        <div class="col-md-4" ng-repeat="film in chosenFilm">
+        <div class="col-md-8" ng-repeat="film in chosenFilm">
           <div class="profile-card text-center">
             <img id="savedPoster" class="img-responsive" ng-src="{{film.poster}}">
             <div class="profile-info">
@@ -41,9 +10,43 @@
               <h2 class="hvr-underline-from-center"><span>
               {{film.genres}}</span></h2>
               <div>{{film.overview}}</div>
-<!--               <a href="http://www.twitter.com/mike_youngg"><i class="fa fa-twitter fa-2x"></i></a> -->
 
-              <a data-ng-model="state.check" ng-click="markAsWatched(film._id,film.marked)"><i ng-style="customStyle.style" class="fa fa-check fa-2x"></i></a>
+                
+      	
+
+
+<!-- <div class="demo"> -->
+<input type="checkbox" ng-model="checkBoxes[$index]" ng-change="valueChange($index)" 
+ class="faChkSqr" ng-click="markAsWatched(film._id,film.marked)">  
+<!-- </div>   -->
+
+
+
+
+	<!-- <input type="checkbox" ng-model="checkBoxes[$index]" ng-change="valueChange($index)"
+	ng-click="markAsWatched(film._id,film.marked)"> -->
+    
+    <pre>{{checkBoxes}}</pre>
+
+              <!-- <a><i ng-style="customStyle.style" class="fa fa-check fa-2x"></i></a> -->
+
+
+
+
+
+			<!-- <label class="btn-checkbox"> -->
+		<!-- <p ng-repeat="checkBoxes in checkBoxes track by $index"> -->
+ <!--  	   <input type="checkbox" ng-model="checkBoxes[$index]" 
+          ng-click="markAsWatched(film._id,film.marked)" /> -->
+	   <!-- </p>		 -->
+				<!-- <i class="fa fa-check fa-2x"></i> -->
+			<!-- </label> -->
+	<!-- 		<button ng-model="settings.marked[$index]" ng-change="alert($index)" ng-click="markAsWatched(film._id,film.marked)"></button> -->
+<!-- 		<a class="btn btn-primary" btn-checkbox ng-model="settings.marked" ng-click="markAsWatched(film._id,film.marked)">Button</a> -->
+			
+
+				
+<!--               <a ng-model="settings.marked" btn-checkbox ng-click="markAsWatched(film._id,film.marked)"><i ng-style="customStyle.style" class="fa fa-check fa-2x"></i></a> -->
 
               <a ng-click="deleteFilm(film._id,film.title)">
                 <i class="fa fa-trash fa-2x"></i></a>
@@ -52,7 +55,6 @@
 
           </div>
         </div>
-</div>
 
 
 
@@ -61,4 +63,4 @@
 
 
 </div>
-<!-- /#wrapper -->
+<!-- /#wrapper

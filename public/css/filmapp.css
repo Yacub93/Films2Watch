@@ -5,11 +5,9 @@ html,body{
 
 
 .nav-bar{
-	/*background-color: #c0392b;*/
-	height: 40px;
-	/*width: 50px;*/
-	margin-right: 200px;
-	margin-left: 500px;
+	margin-right: 100px;
+	margin-left: 600px;
+  margin-bottom: 20px;
 
 }
 
@@ -172,7 +170,8 @@ a.nav-link{
 .highlight  {
     width: 600px;
     color: white;
-    background: rgba(0, 0, 0, 0.26);
+    /*background: rgba(0, 0, 0, 0.26);*/
+    background-color: #22313F;
     border-radius: 10px;
     padding: 3%;
     
@@ -199,7 +198,7 @@ a.nav-link{
 
 .highlight h3,h4,h5,h6 {
     padding-bottom: 1%;
-  border-bottom: 2px dashed rgba(255, 255, 255, 0.41);
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.41);
     font-size:20px;
     text-align : center;
     text-transform: uppercase;
@@ -221,7 +220,7 @@ a.nav-link{
 }
 
 .fa.fa-github:hover{
-  color: #333;
+  color: #6e5494;
 }
 
 .fa.fa-linkedin:hover{
@@ -246,9 +245,10 @@ a.btn-lg.btn-primary:hover{
   color: #2ecc71; 
 }
 
-/*.fa.fa-trash{
-  font-size:30px;
-}*/
+.fa.fa-trash{
+  font-size:50px;
+  margin-left: 180px;
+}
 
 .fa.fa-trash:hover{
   color: #c0392b; 
@@ -266,9 +266,36 @@ a.btn-lg.btn-primary:hover{
   color: #2c3e50;
 }
 .fa.fa-bars:hover{
-  color: #9b59b6; 
+  color: #F7CA18; 
 }
 
+.fa.fa-fire{
+  font-size:35px;
+  color: #2c3e50;
+}
+.fa.fa-fire:hover{
+  color: #F7CA18; 
+}
+
+.fa.fa-globe{
+  font-size:35px;
+  color: #2c3e50;
+}
+.fa.fa-globe:hover{
+  color: #F7CA18; 
+}
+
+
+
+
+.view{
+  background-color:#27ae60;
+  border-color: #27ae60;
+}
+
+.md-padding{
+  background-color: #22313F;
+}
 
 /* Watch List CSS */
 
@@ -278,7 +305,7 @@ a.btn-lg.btn-primary:hover{
 }
 
 .profile-card {
-  background-color: #222222;
+  background-color: #22313F;
   margin-bottom: 20px;
 
       
@@ -376,9 +403,65 @@ a.btn-lg.btn-primary:hover{
 }
 
 .center-card{
-  padding: 20px;
+  /*border-radius: 50%;*/
+  display:inline-block;
+  /*top: -65px;*/
+  margin-left: 320px;
+  /*right: 0;*/
+  /*margin: auto;*/
+  /*z-index: 1;*/
+  /*max-width: 100px;*/
+/*  -webkit-transition: all 0.4s;
+      transition: all 0.4s;*/
 }
 #savedPoster{
-  width: 100%;
-  height: 100%;
+  margin-top: 10px;
+  width: 50%;
+  /*height: 100%;*/
+}
+
+/* CSS used here will be applied after bootstrap.css */
+
+/*.demo {*/
+  /*padding:10px;*/
+/*}*/
+
+/*.demo label{
+ top:3px; left:15px;
+ margin-right:30px;     
+ position:relative;     
+} */ 
+  
+
+input.faChkRnd, input.faChkSqr {
+  visibility: hidden;
+}
+
+input.faChkRnd:checked:after, input.faChkRnd:after,
+input.faChkSqr:checked:after, input.faChkSqr:after {
+  visibility: visible;
+  font-family: FontAwesome;
+  font-size:50px;width: 32px;height: 44px;
+  position: relative;
+  top: 60px;
+  right: 100px;
+  color:#00B16A;
+  /*background-color: white;*/
+  display: inline-block;
+}
+
+input.faChkRnd:checked:after {
+  content: '\f058';
+}
+
+input.faChkRnd:after {
+  content: '\f10c';
+}
+
+input.faChkSqr:checked:after {
+  content: '\f14a';
+}
+
+input.faChkSqr:after {
+  content: '\f096';
 }

@@ -4,7 +4,7 @@
 	var movieDBURL2 = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+apiKey+'&language=en-US&page=1';
 	var baseImgURL = "http://image.tmdb.org/t/p/w185";
 
-var filmApp = angular.module('filmApp', ['ngMaterial','ngAnimate', 'ngRoute']);
+var filmApp = angular.module('filmApp', ['ngMaterial','ngAnimate', 'ngRoute', 'ui.bootstrap']);
 
 
 filmApp.config(['$routeProvider', function($routeProvider){
@@ -292,28 +292,100 @@ $scope.deleteFilm = function (id, title) {
 }
 
 
-
-$scope.markAsWatched = function (id, marked) {
 $scope.customStyle = {};
+// $scope.settings = {};
+// $scope.settings.marked = localStorage.getItem("marked") ? 
+// JSON.parse(localStorage.getItem("marked")) : false;
 
+// $scope.$watch("settings.marked", function (newVal, oldVal) {
 
-$scope.state.check = localStorage.getItem("check") ? 
-JSON.parse(localStorage.getItem("check")) : false;
+//   if (oldVal !== newVal) {
+//     localStorage['marked'] = newVal;
+//     console.log("localStorageNEW: " + localStorage['marked']);
+//     $scope.customStyle.style = {"color":"#2ecc71"};
+//   }
+//     console.log('oldVal ' + oldVal);
+//     console.log('newVal ' + newVal);
+    
+// });
 
-$scope.$watch("state.check", function (newVal, oldVal) {
-  if (oldVal !== newVal) {
-    localStorage.setItem("check", newVal);
+// localStorage.getItem("marked") ? 
+// JSON.parse(localStorage.getItem("marked")) : false;
+// $scope.settings = {};
+// $scope.checkBoxes = []; //checkbox index
+
+//  if(localStorage['checkBoxes']){
+//     $scope.checkBoxes = JSON.parse(localStorage.getItem("checkBoxes"));
+//     console.log(localStorage['checkBoxes'].length);
+//   }
+
+$scope.checkBoxes = [];
+$scope.customStyle = {};
+// $scope.checkBoxes = localStorage.getItem("film.marked") ? 
+// JSON.parse(localStorage.getItem("film.marked")) : false;
+
+  if(localStorage['checkBoxes']){
+    $scope.checkBoxes = JSON.parse(localStorage.getItem("checkBoxes"));
+    if ($scope.checkBoxes.includes(true)) {
+      // $scope.checkBoxes.pop();
+      $scope.customStyle.style = {"color":"#2ecc71"};
+    }
+    
+    console.log("localStorage: " + $scope.checkBoxes);
   }
 
-});
+  $scope.valueChange = function(index){
+    console.log('checkbox Index:' + index);
+    localStorage.setItem("checkBoxes", JSON.stringify($scope.checkBoxes));
+    
+  };
+
+//RESET localStorage on console
+
+  // $scope.alert = function(index, event){
+//   localStorage['marked'] = $scope.settings.marked[index];
+//   alert("checkbox " + index + " is " + $scope.settings.marked[index]);
+
+// }
+
+// $scope.$watch(localStorage['checkbox'], function (newVal, oldVal) {
+
+//   if (oldVal !== newVal) {
+//     localStorage['checkbox'] = newVal;
+//     // console.log("localStorageNEW: " + localStorage['checkbox']);
+//     // $scope.customStyle.style = {"color":"#2ecc71"};
+//   }
+//     console.log('oldVal ' + oldVal);
+//     console.log('newVal ' + newVal);
+    
+// });
 
 
+
+
+// function checkMarker(isMarked) {
+
+
+// $scope.settings.marked = localStorage.getItem("film.marked");
+
+// console.log('localStorage: ' + $scope.settings.marked);
+// return $scope.settings.marked;
+// console.log('checkMarker: '  + marker);
+
+   // if ($scope.film.marked === isMarked) {
+   //    $scope.customStyle.style = {"color":"#2ecc71"};
+   //  }
+// }
+
+
+$scope.markAsWatched = function (id, marked) {
+ 
    var isMarked = marked; 
-   
 
  if (isMarked === false) {
-    $log.info('Film marked as WATCHED: ' + isMarked);
      isMarked = true;
+
+     $log.info('Film marked as WATCHED: ' + isMarked);
      // $log.info(isMarked);
      $http({
             method: 'PUT',
@@ -323,15 +395,21 @@ $scope.$watch("state.check", function (newVal, oldVal) {
           },
         }).then(function successCallback(response) {
             console.log(response.data.marked);
-    });
-    // $route.reload();
-    // $scope.customStyle.style = {"color":"#2ecc71"};
-    // document.getElementById("check").focus($scope.customStyle.style);
+        // localStorage.setItem("checkBoxes", JSON.stringify(response.data.marked));
+            // localStorage['marked'] = response.data.marked;
+            // localStorage['film._id'] = response.data._id;
+            // console.log('ID: '+ localStorage['film._id']);
+            // console.log('Response: ' +localStorage['checkbox']);
+            console.log('Title: ' +  response.data.title);
+
+    });   
+
 }
 
  else if(isMarked === true){
-   $log.info('Film marked as NOT WATCHED: ' + isMarked);
      isMarked = false;
+
+     $log.info('Film marked as NOT WATCHED: ' + isMarked);
      // $log.info(isMarked);
      $http({
             method: 'PUT',
@@ -341,11 +419,17 @@ $scope.$watch("state.check", function (newVal, oldVal) {
           },
         }).then(function successCallback(response) {
             console.log(response.data.marked);
+        // localStorage.setItem("checkBoxes", JSON.stringify(response.data.marked));
+            // localStorage['marked'] = response.data.marked;
+            // localStorage['film._id'] = response.data._id;
+            // console.log('ID: '+ localStorage['film._id']);
+            // console.log('Response: '+localStorage['checkbox']);
+            console.log('Title: '+response.data.title);
+
       });
       
-      // $route.reload();
     }
-
+    
 }
 
   $http({
