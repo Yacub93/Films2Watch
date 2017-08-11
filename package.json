@@ -4,14 +4,17 @@
   "description": "Film Search App",
   "main": "server.js",
   "scripts": {
-    "dev": "lite-server"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yacub Ali",
   "license": "ISC",
-  "dependencies": {
-    "lite-server": "^2.3.0"
+
+  "engines": {
+   "node" :  "6.10.0",
+   "npm"  :  "3.10.10"
+
   },
-  "devDependencies": {
+  "dependencies": {
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "mongoose": "^4.11.5",
