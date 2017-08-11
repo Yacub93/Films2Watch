@@ -78,16 +78,6 @@ Film.findById(filmId, function (err, film) {
 
 });
 
-		// var filmId = req.params.id;
-		// var isMarked = req.params.marked;
-		// console.log(filmId);
-		// console.log(isMarked);
-
-	// Film.collection.updateOneupdate({'marked':'MongoDB Overview'},{$set:{'marked':'New MongoDB Tutorial'}}, function (err, docs) {
- //        console.log(docs);
- //        res.json(docs);
- //    });
-
 
 // POST Films!
 app.post('/search', function (req, res) {

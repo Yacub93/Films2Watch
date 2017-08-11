@@ -310,20 +310,6 @@ a.btn-lg.btn-primary:hover{
 
       
     }
-    
-/*.profile-pic {
-  border-radius: 50%;
-  position: absolute;
-  top: -65px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  z-index: 1;
-  max-width: 100px;
-  -webkit-transition: all 0.4s;
-      transition: all 0.4s;
-}*/
-
         
 .profile-info {
     color: #BDBDBD;
@@ -421,16 +407,6 @@ a.btn-lg.btn-primary:hover{
 }
 
 /* CSS used here will be applied after bootstrap.css */
-
-/*.demo {*/
-  /*padding:10px;*/
-/*}*/
-
-/*.demo label{
- top:3px; left:15px;
- margin-right:30px;     
- position:relative;     
-} */ 
   
 
 input.faChkRnd, input.faChkSqr {
@@ -446,7 +422,7 @@ input.faChkSqr:checked:after, input.faChkSqr:after {
   top: 60px;
   right: 100px;
   color:#00B16A;
-  /*background-color: white;*/
+  padding-bottom: 5px;
   display: inline-block;
 }
 

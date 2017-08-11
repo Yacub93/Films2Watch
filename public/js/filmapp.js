@@ -291,38 +291,9 @@ $scope.deleteFilm = function (id, title) {
     $route.reload(); //re-render the current page
 }
 
-
-$scope.customStyle = {};
-// $scope.settings = {};
-// $scope.settings.marked = localStorage.getItem("marked") ? 
-// JSON.parse(localStorage.getItem("marked")) : false;
-
-// $scope.$watch("settings.marked", function (newVal, oldVal) {
-
-//   if (oldVal !== newVal) {
-//     localStorage['marked'] = newVal;
-//     console.log("localStorageNEW: " + localStorage['marked']);
-//     $scope.customStyle.style = {"color":"#2ecc71"};
-//   }
-//     console.log('oldVal ' + oldVal);
-//     console.log('newVal ' + newVal);
-    
-// });
-
-// localStorage.getItem("marked") ? 
-// JSON.parse(localStorage.getItem("marked")) : false;
-// $scope.settings = {};
-// $scope.checkBoxes = []; //checkbox index
-
-//  if(localStorage['checkBoxes']){
-//     $scope.checkBoxes = JSON.parse(localStorage.getItem("checkBoxes"));
-//     console.log(localStorage['checkBoxes'].length);
-//   }
-
 $scope.checkBoxes = [];
 $scope.customStyle = {};
-// $scope.checkBoxes = localStorage.getItem("film.marked") ? 
-// JSON.parse(localStorage.getItem("film.marked")) : false;
+
 
   if(localStorage['checkBoxes']){
     $scope.checkBoxes = JSON.parse(localStorage.getItem("checkBoxes"));
@@ -340,43 +311,6 @@ $scope.customStyle = {};
     
   };
 
-//RESET localStorage on console
-
-  // $scope.alert = function(index, event){
-//   localStorage['marked'] = $scope.settings.marked[index];
-//   alert("checkbox " + index + " is " + $scope.settings.marked[index]);
-
-// }
-
-// $scope.$watch(localStorage['checkbox'], function (newVal, oldVal) {
-
-//   if (oldVal !== newVal) {
-//     localStorage['checkbox'] = newVal;
-//     // console.log("localStorageNEW: " + localStorage['checkbox']);
-//     // $scope.customStyle.style = {"color":"#2ecc71"};
-//   }
-//     console.log('oldVal ' + oldVal);
-//     console.log('newVal ' + newVal);
-    
-// });
-
-
-
-
-// function checkMarker(isMarked) {
-
-
-// $scope.settings.marked = localStorage.getItem("film.marked");
-
-// console.log('localStorage: ' + $scope.settings.marked);
-// return $scope.settings.marked;
-// console.log('checkMarker: '  + marker);
-
-   // if ($scope.film.marked === isMarked) {
-   //    $scope.customStyle.style = {"color":"#2ecc71"};
-   //  }
-// }
-
 
 $scope.markAsWatched = function (id, marked) {
  
@@ -385,8 +319,8 @@ $scope.markAsWatched = function (id, marked) {
  if (isMarked === false) {
      isMarked = true;
 
-     $log.info('Film marked as WATCHED: ' + isMarked);
-     // $log.info(isMarked);
+     // $log.info('Film marked as WATCHED: ' + isMarked);
+
      $http({
             method: 'PUT',
             url:'/watch-list/'+id+'/'+isMarked,
@@ -394,13 +328,7 @@ $scope.markAsWatched = function (id, marked) {
               'Content-Type': 'application/json;charset=utf-8'
           },
         }).then(function successCallback(response) {
-            console.log(response.data.marked);
-        // localStorage.setItem("checkBoxes", JSON.stringify(response.data.marked));
-            // localStorage['marked'] = response.data.marked;
-            // localStorage['film._id'] = response.data._id;
-            // console.log('ID: '+ localStorage['film._id']);
-            // console.log('Response: ' +localStorage['checkbox']);
-            console.log('Title: ' +  response.data.title);
+            // $log.info(response.data);
 
     });   
 
@@ -409,8 +337,8 @@ $scope.markAsWatched = function (id, marked) {
  else if(isMarked === true){
      isMarked = false;
 
-     $log.info('Film marked as NOT WATCHED: ' + isMarked);
-     // $log.info(isMarked);
+     // $log.info('Film marked as NOT WATCHED: ' + isMarked);
+
      $http({
             method: 'PUT',
             url:'/watch-list/'+id+'/'+isMarked,
@@ -418,13 +346,7 @@ $scope.markAsWatched = function (id, marked) {
               'Content-Type': 'application/json;charset=utf-8'
           },
         }).then(function successCallback(response) {
-            console.log(response.data.marked);
-        // localStorage.setItem("checkBoxes", JSON.stringify(response.data.marked));
-            // localStorage['marked'] = response.data.marked;
-            // localStorage['film._id'] = response.data._id;
-            // console.log('ID: '+ localStorage['film._id']);
-            // console.log('Response: '+localStorage['checkbox']);
-            console.log('Title: '+response.data.title);
+            // $log.info(response.data);
 
       });
       
