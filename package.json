@@ -8,15 +8,14 @@
   },
   "author": "Yacub Ali",
   "license": "ISC",
-
   "engines": {
-   "node" :  "6.10.0",
-   "npm"  :  "3.10.10"
-
+    "node": "6.10.0",
+    "npm": "3.10.10"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
+    "express": "^4.15.4",
     "mongoose": "^4.11.5",
     "nodemon": "^1.11.0"
   }
