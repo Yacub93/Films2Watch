@@ -91,7 +91,8 @@ app.post('/search', function (req, res) {
 
 });
 
-var port = 3030; //port number
+// var port = 3030; //port number
+var port = process.env.PORT || 5000; //port number
 
 app.listen(port, function () {
 	console.log("Server running on port " + port);
