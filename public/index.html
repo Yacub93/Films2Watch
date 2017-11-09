@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Films2Watch</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="public/ico/favicon.ico" type="image/x-icon">
     <link rel="icon" href="public/ico/favicon.ico" type="image/x-icon">
 
@@ -35,13 +35,14 @@
     <script src="js/controllers/singleFilmController.js"></script>
     <script src="js/controllers/listFilmController.js"></script>
     <script src="js/controllers/searchFilmController.js"></script>
-    <script src="js/controllers/panelController.js"></script>
 
 	<!-- CSS Links-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 	  <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
 	<link rel="stylesheet" type="text/css" href="css/filmapp.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:600" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	    <!-- Simple Side bar CSS -->
@@ -51,7 +52,7 @@
 <body>
 
 
-<div id="wrapper">
+<div id="wrapper" ng-controller="rootController">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
 	            <ul class="sidebar-nav">
@@ -72,18 +73,32 @@
 	                <li>
 	                    <a href="#/about">About</a>
 	                </li>
+	                
+	                 <p class="copyright">Copyright &copy; {{footer.copyright}}</p>
+	                
 	            </ul>
         </div>
 
         <!-- /#sidebar-wrapper -->
 
 	<div id="page-content-wrapper" ng-controller="rootController">
-		<div class="container-fluid">
-			<a href="#menu-toggle" class="fa fa-bars" id="menu-toggle"></a>
-			<h1>{{appInfo.heading}}</h1>
-		</div>
+		<!-- <div class="container-fluid"> -->
+			
+			<h1 class="header">
+				{{appInfo.heading}}
+				<a href="#menu-toggle" class="fa fa-bars" id="menu-toggle"></a>
+				
+			</h1>
+		<!-- </div> -->
+
+
 	</div>
+
+
+
+
 <!-- </div> -->
+
 
 
 <div class="ng-view"></div>

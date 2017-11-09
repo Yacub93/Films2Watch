@@ -1,13 +1,52 @@
-html,body{
+html, body{
 	background-color: #ecf0f1;
 
 }
 
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    font-family: 'Roboto Slab', serif;
+/*    position: fixed;
+    right: 0;
+    top: 0;
+    left: 0;
+    padding: 1rem;*/
+    z-index: 1;
+    position: fixed;
+    clear: both;
+    height: 50px;
+    width: 100%;
+    left: 0; right: 0;
+    top: 0;
+    color: white;
+    background-color: #22313F;
+}
+
+/* Footer */
+.copyright {
+/*  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem;*/
+/*  position: fixed;
+  height: 30px;
+  clear: both;
+  width: 100%;*/
+  margin-top: 510px;
+  background-color: #22313F;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  /*text-align: center;*/
+}
 
 .nav-bar{
-	margin-right: 100px;
+/*	margin-right: 100px;
 	margin-left: 600px;
-  margin-bottom: 20px;
+  margin-bottom: 20px;*/
 
 }
 
@@ -18,7 +57,7 @@ html,body{
 }
 
 a.nav-link:hover {
-    background-color: #34495e;
+    background-color: #22313F;
 }
 
 
@@ -137,10 +176,10 @@ a.nav-link{
 /* film card alignment*/
 .row-margin-bottom {
     margin-bottom: 20px;
-    position: absolute;
+    position: fixed;
     width: 100%;
     z-index: 100;
-    top: 70%;
+    top: 40%;
     left: 40%;
     right: 50%;
     margin: -100px 0 0 -150px;
@@ -157,9 +196,9 @@ a.nav-link{
 
 /* ABOUT Section */
 .main-container{
-    position: absolute;
+    position: fixed;
     width: 100%;
-    z-index: 100;
+    /*z-index: 100;*/
     top: 40%;
     left: 40%;
     right: 50%;
@@ -262,8 +301,12 @@ a.btn-lg.btn-primary:hover{
 }
 
 .fa.fa-bars{
-  font-size:20px;
-  color: #2c3e50;
+  font-size:40px;
+  position:absolute;
+  right: 3px;
+
+  text-decoration: none;
+  color: white;
 }
 .fa.fa-bars:hover{
   color: #F7CA18; 
@@ -293,9 +336,12 @@ a.btn-lg.btn-primary:hover{
   border-color: #27ae60;
 }
 
-.md-padding{
+/* Input search box */
+md-content.md-padding._md.flex{
   background-color: #22313F;
+  margin-top: 10px;
 }
+
 
 /* Watch List CSS */
 
@@ -441,3 +487,5 @@ input.faChkSqr:checked:after {
 input.faChkSqr:after {
   content: '\f096';
 }
+
+
