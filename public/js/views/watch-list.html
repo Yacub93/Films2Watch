@@ -1,6 +1,30 @@
-<h4>{{Title}}</h4>
-<div class="center-card">
 
+<section class="grid-1" ng-repeat="film in chosenFilm">
+  <!-- <div class="profile-card"> -->
+  <div class="profile-card text-center">
+            <img id="savedPoster" class="img-responsive" ng-src="{{film.poster}}">
+          <div class="profile-info">
+              <h2 class="hvr-underline-from-center">{{film.title}}<span>{{film.release |  date:  "dd.MM.y" : UTC+00:00 }}
+              </span></h2>
+              <h2 class="hvr-underline-from-center"><span>
+              {{film.genres}}</span></h2>
+              
+          </div>
+  </div>
+
+<div class="item-1">{{film.overview}}
+
+      <input type="checkbox" ng-model="checkBoxes[$index]" ng-change="valueChange($index)" 
+     class="faChkSqr" ng-click="markAsWatched(film._id,film.marked)">  
+        <!-- <pre style="color: white;">{{checkBoxes}}</pre> -->
+      <a ng-click="deleteFilm(film._id,film.title)">
+      <i class="fa fa-trash fa-2x"></i></a>
+
+</div>
+</section>
+
+
+<!-- <div class="center-card">
         <div class="col-md-8" ng-repeat="film in chosenFilm">
           <div class="profile-card text-center">
             <img id="savedPoster" class="img-responsive" ng-src="{{film.poster}}">
@@ -17,7 +41,7 @@
  class="faChkSqr" ng-click="markAsWatched(film._id,film.marked)">  
 
     
-    <pre>{{checkBoxes}}</pre>
+    <pre style="color: transparent;">{{checkBoxes}}</pre>
 
 
              <a ng-click="deleteFilm(film._id,film.title)">
@@ -28,9 +52,9 @@
           </div>
         </div>
 
-<!--     <div class="footer" ng-controller="rootController">
-              <p class="copyright">Copyright &copy; {{footer.copyright}}</p>
-        </div>     --> 
+
+
+</div> -->
 
 </div>
 <!-- /#wrapper

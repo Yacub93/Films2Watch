@@ -1,12 +1,12 @@
 
 <div ng-controller='PanelController as panel'>
 	<div class="nav-bar">
-	    <ul class="nav nav-pills">
+	    <ul class="nav nav-tab">
 	      <li ng-class="{active: panel.isSelected(1) } ">
-	        <a data-toggle="pill" class="nav-link fa fa-fire" ng-href="tabHot" ng-click="panel.selectTab(1)"></a>
+	        <a data-toggle="tab" class="nav-link fa fa-fire" ng-href="tabHot" ng-click="panel.selectTab(1)"></a>
 	      </li>
 	      <li ng-class="{active: panel.isSelected(2) }">
-	        <a data-toggle="pill" class="nav-link fa fa-globe" ng-href="tabUpcoming" ng-click="panel.selectTab(2)"></a>
+	        <a data-toggle="tab" class="nav-link fa fa-globe" ng-href="tabUpcoming" ng-click="panel.selectTab(2)"></a>
 	      </li>
 	    </ul>
     </div>
@@ -47,9 +47,9 @@
   </div> 
 </div>
   <!-- .Close tabTwo -->
-<!--     <div class="footer" ng-controller="rootController">
-              <p class="copyright">Copyright &copy; {{footer.copyright}}</p>
-    </div> -->
+
+
+
 </div>
 
 

@@ -1,11 +1,70 @@
 html, body{
-	background-color: #ecf0f1;
+  background: url(https://images.unsplash.com/photo-1485095329183-d0797cdc5676?auto=format&fit=crop&w=2700&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D);
+  background-size: cover;
 
 }
 
-* {
-    box-sizing: border-box;
+.grid-1 {
+  display: grid;
+  background: #222;
+  /*width: 100%;*/
+  max-width: 750px;
+  margin: 0 auto;
+  
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  
+  grid-gap: 20px;
+  
 }
+
+/* items */
+
+.grid-1 div {
+  color: #ecf0f1;
+  font-size: 20px;
+  padding: 20px;
+  
+  }
+
+/* specific item styles */
+
+div.item-1 {
+    background: #222;
+    position: absolute;
+    width: 20%;
+    margin-left: 450px;
+
+}
+
+div.item-2 {
+    background: #222;
+    position: fixed;
+    margin-left: 450px;
+    margin-right: 20px;
+    margin-top:350px;
+
+}
+
+div.profile-card{
+  padding-right: 400px;
+  background-color: #3498db;
+  margin-bottom: 20px;
+}
+
+/*div.del-watched{
+  margin-top: 450px;
+}*/
+
+
+
+
+
+
+
+
+
+
+
 
 .header {
     font-family: 'Roboto Slab', serif;
@@ -21,7 +80,7 @@ html, body{
     width: 100%;
     left: 0; right: 0;
     top: 0;
-    color: white;
+    color: #ecf0f1;
     background-color: #22313F;
 }
 
@@ -36,7 +95,7 @@ html, body{
   height: 30px;
   clear: both;
   width: 100%;*/
-  margin-top: 510px;
+  margin-top: 400px;
   background-color: #22313F;
   font-family: 'Montserrat', sans-serif;
   color: white;
@@ -44,13 +103,14 @@ html, body{
 }
 
 .nav-bar{
+  float: right;
 /*	margin-right: 100px;
 	margin-left: 600px;
   margin-bottom: 20px;*/
 
 }
 
-.nav-pills {
+.nav-tab {
   	font-size: 1.4em;
 	  margin-bottom: 10px;
 
@@ -61,8 +121,9 @@ a.nav-link:hover {
 }
 
 
-a.nav-link{
-	color: #2980b9;
+a.nav-link:active{
+   background-color: #22313F;
+   color: orange;
 }
 
 #Film {
@@ -287,6 +348,7 @@ a.btn-lg.btn-primary:hover{
 .fa.fa-trash{
   font-size:50px;
   margin-left: 180px;
+  margin-top: 49px;
 }
 
 .fa.fa-trash:hover{
@@ -328,9 +390,6 @@ a.btn-lg.btn-primary:hover{
   color: #F7CA18; 
 }
 
-
-
-
 .view{
   background-color:#27ae60;
   border-color: #27ae60;
@@ -349,14 +408,7 @@ md-content.md-padding._md.flex{
 .container {
   padding: 20px;
 }
-
-.profile-card {
-  background-color: #22313F;
-  margin-bottom: 20px;
-
-      
-    }
-        
+       
 .profile-info {
     color: #BDBDBD;
     padding: 25px;
@@ -372,13 +424,13 @@ md-content.md-padding._md.flex{
         
 .profile-info span {
   display: block;
-    font-size: 12px;
-    color: #4CB493;
-  letter-spacing: 2px;
+  font-size: 15px;
+  color: #ecf0f1; /* h2 text colour */
+  letter-spacing: 1.5px;
 }
 
 .profile-info a {
-   color: #4CB493;
+   color: #ecf0f1;
 }
 .profile-info i {
       padding: 15px 35px 0px 35px;

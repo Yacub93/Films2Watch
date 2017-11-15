@@ -66,7 +66,7 @@ $http.get(movieDBURL2).success(function(data2) {
 	});//.http.get movieDBURL
 }]);//.Close Controller
 
-filmApp.controller('PanelController',[function(){	
+filmApp.controller('PanelController',['$scope', function($scope){	
 
  vm = this;
   vm.tab = 1;
@@ -76,6 +76,16 @@ filmApp.controller('PanelController',[function(){
   vm.isSelected = function(checkTab){
     return vm.tab === checkTab;
   }
+
+
+      if(vm.isSelected == 1){
+        return {'background-color':'#22313F'};
+      }
+
+
+ 
+
+
 }]);//.Page Controller
 
 

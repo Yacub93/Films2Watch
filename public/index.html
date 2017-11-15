@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="filmApp">
+<html lang="en" ng-app="filmApp" ng-controller="rootController">
 <head>
 	<meta charset="UTF-8">
 	<title>Films2Watch</title>
@@ -52,7 +52,8 @@
 <body>
 
 
-<div id="wrapper" ng-controller="rootController">
+
+<div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
 	            <ul class="sidebar-nav">
@@ -93,24 +94,29 @@
 
 
 	</div>
-
-
+<div class="ng-view"></div>
 
 
 <!-- </div> -->
 
 
 
-<div class="ng-view"></div>
 
 
 
-        <!-- Menu Toggle Script -->
+
+    <!-- Side-bar Menu Toggle Script -->
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
 
+    });
+	$('#menu-toggle').click(function(e){
+	    e.stopPropagation();
+	});
+	$('body,html').click(function(e){
+       $('#wrapper').removeClass('toggled');
     });
     </script>
 
