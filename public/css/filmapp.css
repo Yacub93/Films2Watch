@@ -51,28 +51,19 @@ div.profile-card{
   margin-bottom: 20px;
 }
 
-/*div.del-watched{
-  margin-top: 450px;
-}*/
 
+a.ng-binding{
+  color:#ecf0f1;
+  text-decoration: none;
+}
 
-
-
-
-
-
-
-
-
-
+a.ng-binding:hover{
+  color:#F7CA18;
+  text-decoration: none;
+}
 
 .header {
     font-family: 'Roboto Slab', serif;
-/*    position: fixed;
-    right: 0;
-    top: 0;
-    left: 0;
-    padding: 1rem;*/
     z-index: 1;
     position: fixed;
     clear: both;
@@ -86,15 +77,6 @@ div.profile-card{
 
 /* Footer */
 .copyright {
-/*  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 0.5rem;*/
-/*  position: fixed;
-  height: 30px;
-  clear: both;
-  width: 100%;*/
   margin-top: 400px;
   background-color: #22313F;
   font-family: 'Montserrat', sans-serif;
@@ -104,10 +86,6 @@ div.profile-card{
 
 .nav-bar{
   float: right;
-/*	margin-right: 100px;
-	margin-left: 600px;
-  margin-bottom: 20px;*/
-
 }
 
 .nav-tab {
@@ -134,7 +112,7 @@ a.nav-link:active{
 #Film .film-item {
 
  margin:5px;
-  /*background-color: white;*/
+  background-color: #F7CA18;
  border: 1px outset rgba(255, 255, 255, 0.6);
  width: 100%;
 }
@@ -376,7 +354,7 @@ a.btn-lg.btn-primary:hover{
 
 .fa.fa-fire{
   font-size:35px;
-  color: #2c3e50;
+  color: #ecf0f1;
 }
 .fa.fa-fire:hover{
   color: #F7CA18; 
@@ -384,7 +362,7 @@ a.btn-lg.btn-primary:hover{
 
 .fa.fa-globe{
   font-size:35px;
-  color: #2c3e50;
+  color: #ecf0f1;
 }
 .fa.fa-globe:hover{
   color: #F7CA18; 
