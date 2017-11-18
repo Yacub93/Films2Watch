@@ -1,10 +1,11 @@
-	var apiKey = "d313b5dab4af5c3ad0636657c1efb5b4"; //v3 auth
+  var apiKey = "d313b5dab4af5c3ad0636657c1efb5b4"; //v3 auth
 	var movieDBURL = 'https://api.themoviedb.org/3/movie/upcoming?api_key='+apiKey+'&language=en-US&page=1&region=US';
 
 	var movieDBURL2 = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+apiKey+'&language=en-US&page=1';
 	var baseImgURL = "http://image.tmdb.org/t/p/w185";
 
-var filmApp = angular.module('filmApp', ['ngMaterial','ngAnimate', 'ngRoute', 'ui.bootstrap']);
+
+var filmApp = angular.module('filmApp', ['ngMaterial','ngAnimate', 'ngRoute','ui.bootstrap','angular-web-notification']);
 
 
 filmApp.config(['$routeProvider', function($routeProvider){
@@ -33,7 +34,7 @@ filmApp.config(['$routeProvider', function($routeProvider){
 
 
 // List of Popular films Page controller
-filmApp.controller('listFilmController',['$scope', '$http', function($scope,$http){	
+filmApp.controller('listFilmController',['$scope','$http','$filter', function($scope,$http,$filter){	
 
 	$scope.results1  = [];
 	$scope.results2 = [];
@@ -62,9 +63,64 @@ $http.get(movieDBURL2).success(function(data2) {
           						image: baseImgURL + data2.results[i].poster_path,
           						release: data2.results[i].release_date});
               	}
+                console.log($scope.results2[0].title);
 
+    //Sort by release date            
+    $scope.results2.sort(function(a, b) {
+    var dateA = new Date(a.release), dateB = new Date(b.release);
+    return dateB - dateA;//return recent release date
+    });
+
+    $scope.results2[0].release = $filter('date')($scope.results2[0].release, "dd/MM/yyyy"); // format date
+
+    $scope.title = $scope.results2[0].title;
+    $scope.text = $scope.results2[0].release;
+    $scope.icon = $scope.results2[0].image;
+    console.log($scope.results2);
 	});//.http.get movieDBURL
-}]);//.Close Controller
+
+
+
+
+
+
+
+
+    //Web Notification directive -- 
+}]).directive('showButton', ['webNotification', function (webNotification) {
+    'use strict';
+
+    return {
+        restrict: 'C',
+        scope: {
+            notificationTitle: '=',
+            notificationText: '='
+        },
+        link: function (scope, element) {
+            element.on('click', function onClick() {
+                webNotification.showNotification(scope.notificationTitle, {
+                    body: scope.notificationText,
+                    icon: 'public/ico/favicon.ico',
+                    onClick: function onNotificationClicked() {
+                        console.log('Notification clicked.');
+                    },
+                    autoClose: 4000 //auto close the notification after 4 seconds (you can manually close it via hide function)
+                }, function onShow(error, hide) {
+                    if (error) {
+                        window.alert('Unable to show notification: ' + error.message);
+                    } else {
+                        console.log('Notification Shown.');
+
+                        setTimeout(function hideNotification() {
+                            console.log('Hiding notification....');
+                            hide(); //manually close the notification (you can skip this if you use the autoClose option)
+                        }, 5000);
+                    }
+                });
+            });
+        }
+    };
+}]);
 
 filmApp.controller('PanelController',['$scope', function($scope){	
 

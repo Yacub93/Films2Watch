@@ -13,6 +13,7 @@
     "npm": "3.10.10"
   },
   "dependencies": {
+    "angular-web-notification": "^1.2.26",
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "express": "^4.15.4",

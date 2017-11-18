@@ -368,6 +368,15 @@ a.btn-lg.btn-primary:hover{
   color: #F7CA18; 
 }
 
+a.show-button.nav-link.fa.fa-bell{
+  font-size:35px;
+  color: #ecf0f1;
+}
+
+a.show-button.nav-link.fa.fa-bell:hover{
+  color: #F7CA18;
+}
+
 .view{
   background-color:#27ae60;
   border-color: #27ae60;
