@@ -15,5 +15,4 @@ A simple, film search app built using the AngularJS Framework, MongoDB, Express,
  
 
 ## Screenshots
-<img width="1279" alt="films2watch" src="https://user-images.githubusercontent.com/26364425/32621742-b2566fa6-c578-11e7-9937-53d217dfa189.png">
-
+<img width="1279" alt="film app" src="https://user-images.githubusercontent.com/26364425/32984107-ad96729c-cc97-11e7-8e12-a07de39ea312.png">
